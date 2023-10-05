@@ -60,7 +60,11 @@ class _HomeState extends State<Home> {
         height: 40,
         color: Colors.grey[900],
       ),
-      Container(padding: EdgeInsets.all(10), margin: EdgeInsets.all(10), color: Color.fromARGB(255, 177, 113, 177),
+      Container(
+        padding: EdgeInsets.all(10), 
+        decoration: BoxDecoration(color: Colors.black   ),
+        margin: EdgeInsets.all(10), 
+        color: Color.fromARGB(255, 177, 113, 177),
         child: Text(
           'Take:\nDosage:\nRemaning pills:\nWhen:', 
           style: TextStyle(color: Colors.black, fontSize: 20),),
@@ -104,3 +108,18 @@ class _HomeState extends State<Home> {
   );
   }
 }
+
+class Therapy{
+  String name = '';
+  int dosage = 0;
+  int timesADay = 0;
+  List<DateTime> timeToTake = []; //koliko puta dnevno
+  late DateTime overallTakingTime; //dokad se uzima
+  int pillsAvaliable = 0;
+  Therapy(String name, int dosage, int timesADay, int pillsInBottle){
+    this.name = name;
+    this.dosage = dosage;
+    this.timesADay = timesADay;
+    this.pillsAvaliable = pillsInBottle;
+  }
+} 
