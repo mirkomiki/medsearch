@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.manage_accounts),
             label: 'Settings',
           ),
-      ],
+      ],  
       backgroundColor: Color.fromARGB(255, 26, 26, 26),
       unselectedItemColor: Color.fromARGB(129, 255, 255, 255),
       selectedItemColor: Colors.white,
