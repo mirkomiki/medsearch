@@ -1,13 +1,10 @@
-import 'dart:js_util';
-import 'dart:ui';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'therapy.dart';
 class DailyTherapyCard extends StatelessWidget {
   final Function() delete;
   final Therapy therapy;
-  DailyTherapyCard({ required this.therapy, required this.delete});
+  const DailyTherapyCard({super.key,  required this.therapy, required this.delete});
   
   @override
   Widget build(BuildContext context) {
@@ -17,23 +14,23 @@ class DailyTherapyCard extends StatelessWidget {
       ),
       shadowColor: Colors.black,
       surfaceTintColor: Colors.amber,
-      color: Color.fromARGB(255, 188, 123, 224),
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+      color: const Color.fromARGB(255, 188, 123, 224),
+      margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
       child:
       
       Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text(
             'Take: ${therapy.name}', 
-            style: TextStyle(color: Colors.black, fontSize: 20),),
+            style: const TextStyle(color: Colors.black, fontSize: 20),),
             Text('Dosage:${therapy.dosage}',
-            style: TextStyle(color: Colors.black, fontSize: 20),),
+            style: const TextStyle(color: Colors.black, fontSize: 20),),
             Text('Remaning pills:${therapy.pillsAvaliable}',
-            style: TextStyle(color: Colors.black, fontSize: 20),),
-            Text('When:',
+            style: const TextStyle(color: Colors.black, fontSize: 20),),
+            const Text('When:',
             style: TextStyle(color: Colors.black, fontSize: 20),),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -45,7 +42,7 @@ class DailyTherapyCard extends StatelessWidget {
                       backgroundColor:MaterialStateProperty.all<Color>(Colors.green),
                       iconColor: MaterialStateProperty.all<Color>(Colors.white),
                     ),
-                  icon: Icon(Icons.done),
+                  icon: const Icon(Icons.done),
                   onPressed: () {
                       
                       AnimatedSnackBar.rectangle(
@@ -57,9 +54,9 @@ class DailyTherapyCard extends StatelessWidget {
                       ).show(context);
                   },
                   
-                  label: Text('DONE', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),)
+                  label: const Text('DONE', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),)
                   ),
-                SizedBox(width: 5,),
+                const SizedBox(width: 5,),
                 
                 ElevatedButton.icon(
                   style: 
@@ -67,23 +64,24 @@ class DailyTherapyCard extends StatelessWidget {
                       backgroundColor:MaterialStateProperty.all<Color>(Colors.red),
                       iconColor: MaterialStateProperty.all<Color>(Colors.white),
                     ),
-                  icon: Icon(Icons.do_disturb_on_outlined),
-                  onPressed: () {onDeleteButtonPressed(context);},
-                  
-                  label: Text('Ignore', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),)
-                ),
-                IconButton(
-                  onPressed:() {
-                    delete;
-                  AnimatedSnackBar.rectangle(
-                      'Warning: Delete',
-                      'Are you sure you want to delete this reminder?',
+                  icon: const Icon(Icons.do_disturb_on_outlined),
+                  onPressed: () {AnimatedSnackBar.rectangle(
+                      'Warning: Ignore',
+                      'Are you sure you want to ignore this reminder?',
                       type: AnimatedSnackBarType.warning,
                       brightness: Brightness.dark,
                       mobileSnackBarPosition: MobileSnackBarPosition.bottom,
                       ).show(context);
                       
                       },
+                  
+                  label: const Text('Ignore', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),)
+                ),
+                IconButton(
+                  onPressed: () =>
+                      onDeleteButtonPressed(context), 
+                      
+                      
                 icon: Icon(Icons.delete, color: Colors.grey[700]), ),
               ],
             )
@@ -97,13 +95,14 @@ class DailyTherapyCard extends StatelessWidget {
 
     //Functions
     void onDeleteButtonPressed(BuildContext context){
-    delete;
+    delete();
     AnimatedSnackBar.rectangle(
-    'Warning: Delete',
-    'Are you sure you want to delete this reminder?',
+    'Warning: Deleted',
+    'Do you want to undo changes', //Later fix dona il neko ce to neams, no time to dye
     type: AnimatedSnackBarType.warning,
     brightness: Brightness.dark,
     mobileSnackBarPosition: MobileSnackBarPosition.bottom,
     ).show(context);
     }
+    
 }
