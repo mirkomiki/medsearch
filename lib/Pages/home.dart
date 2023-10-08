@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:medsearch/Pages/newTherapy.dart';
+import 'package:medsearch/Pages/settings.dart';
 import 'package:medsearch/dailyTherapyCard.dart';
 import 'package:medsearch/therapy.dart';
-
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -19,34 +20,17 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
     backgroundColor: Colors.grey[900],
-    bottomNavigationBar: BottomNavigationBar(
-    items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month_outlined),
-            label: 'Calendar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.manage_accounts),
-            label: 'Settings',
-          ),
-      ],  
-      backgroundColor: const Color.fromARGB(255, 26, 26, 26),
-      unselectedItemColor: const Color.fromARGB(129, 255, 255, 255),
-      selectedItemColor: Colors.white,
-    ),
-    
     appBar: AppBar(
       title: const Text('Smart therapy tracker'),
       centerTitle: true,
       backgroundColor: const Color.fromARGB(255, 196, 82, 135),
     ),
-    body: SingleChildScrollView(
+    body: 
+    
+    SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget> [
@@ -87,7 +71,9 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             ElevatedButton(
-              onPressed: () {}, 
+              onPressed: () {
+                Navigator.pushNamed(context, '/full-therapy'); 
+              }, 
               style: ButtonStyle(
                 backgroundColor:MaterialStateProperty.all<Color>(Colors.amber)), 
               child: const Text(
@@ -96,7 +82,9 @@ class _HomeState extends State<Home> {
             ),
             
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/reminders');
+                },
               icon: const Icon( 
               Icons.add_alert_rounded,
               size: 24.0,
@@ -113,16 +101,6 @@ class _HomeState extends State<Home> {
       ),
     ),
  
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {},
-      backgroundColor: const Color.fromARGB(255, 196, 82, 135),
-      child: const Icon(Icons.add,
-      size: 36,
-      ),
-    ),
   );
   }
 }
-
-
-
