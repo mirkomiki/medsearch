@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medsearch/Pages/newTherapy.dart';
-import 'package:medsearch/Pages/settings.dart';
 import 'package:medsearch/dailyTherapyCard.dart';
 import 'package:medsearch/therapy.dart';
 class Home extends StatefulWidget {

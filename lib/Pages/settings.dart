@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Settings extends StatefulWidget {
   const Settings({super.key});
 
@@ -15,16 +14,25 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         actions: const [CircleAvatar(radius: 9)],
         title: const Text('Settings', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)), ),
-        backgroundColor: const Color.fromARGB(255, 26, 26, 26),
+        backgroundColor: Colors.grey[900],
+        titleTextStyle: TextStyle(fontSize: 24, letterSpacing: 1.2),
+        shadowColor: Colors.grey[900],
       ),
-      backgroundColor: const Color.fromARGB(255, 26, 26, 26),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          TextButton(onPressed: () {Navigator.pushNamed(context, '/user');}, child: Text('Edit Account'))
-        ],
-      ),
+
+      backgroundColor: Colors.grey[900],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+             TextButton(onPressed: () {
+              Navigator.pushNamed(context, '/user');
+              }, 
+              child: const Text('Edit Account'),
+              ),
+          ],
+           
+        ),
+      )
+      
     );
   }
 }
