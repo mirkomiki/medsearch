@@ -11,25 +11,73 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: const [CircleAvatar(radius: 9)],
-        title: const Text('Settings', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)), ),
-        backgroundColor: Colors.grey[900],
-        titleTextStyle: TextStyle(fontSize: 24, letterSpacing: 1.2),
-        shadowColor: Colors.grey[900],
-      ),
-
+      
+      
       backgroundColor: Colors.grey[900],
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-             TextButton(onPressed: () {
-              Navigator.pushNamed(context, '/user');
-              }, 
-              child: const Text('Edit Account'),
+      body: SafeArea(
+        minimum: EdgeInsets.only(top: 35, left: 20),
+        child: SingleChildScrollView(
+          child: Column(
+      
+            children: <Widget>[
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: 
+                      Text('Settings', 
+                        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 28),
+                      ),
+                    
+                  ),
+                  Expanded(child: CircleAvatar(radius: 28,), flex: 1,)
+                ],
               ),
-          ],
-           
+              SizedBox(height: 25,),
+              Row(mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(onPressed: () {
+                  Navigator.pushNamed(context, '/user');
+                  }, 
+                  child: Text('Edit Account', style: TextStyle(fontSize: 20),),
+                  )
+              ],
+              ),
+              SizedBox(height: 25,),
+              Row(mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(onPressed: () {
+                  Navigator.pushNamed(context, '/edit-family-settings');
+                  }, 
+                  child: Text('Edit Family Settings', style: TextStyle(fontSize: 20),),
+                  )
+              ],
+              ),
+              SizedBox(height: 25,),
+              Row(mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(onPressed: () {
+                  Navigator.pushNamed(context, '/add-family-member');
+                  }, 
+                  child: Text('Add Family Member', style: TextStyle(fontSize: 20),),
+                  )
+              ],
+              ),
+              SizedBox(height: 25,),
+              Row(mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(onPressed: () {
+                  Navigator.pushNamed(context, '/report-bug');
+                  }, 
+                  child: Text('Report Bug', style: TextStyle(fontSize: 20),),
+                  )
+              ],
+              ),
+              SizedBox(height: 25,),
+            ],
+             
+          ),
         ),
       )
       

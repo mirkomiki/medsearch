@@ -11,8 +11,11 @@ class _UserEditState extends State<UserEdit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-      const Text('hello'),
+      backgroundColor: Colors.grey[900],
+      appBar: AppBar(
+        title: const Text('User account'),
+        backgroundColor: const Color.fromARGB(255, 0, 164, 164),
+      ),
     );
   }
 }

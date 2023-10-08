@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/home.dart';
 import 'package:medsearch/Pages/newTherapy.dart';
 import 'package:medsearch/Pages/settings.dart';
-import 'package:medsearch/dailyTherapyCard.dart';
-import 'package:medsearch/therapy.dart';
+import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
+import 'package:medsearch/TypesOfData/therapy.dart';
 
 class Pages extends StatefulWidget {
   const Pages({super.key});

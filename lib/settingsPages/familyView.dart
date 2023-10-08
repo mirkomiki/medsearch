@@ -10,6 +10,12 @@ class EditFamily extends StatefulWidget {
 class _EditFamilyState extends State<EditFamily> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: Colors.grey[900],
+      appBar: AppBar(
+        title: const Text('Family'),
+        backgroundColor: const Color.fromARGB(255, 0, 164, 164),
+      ),
+    );
   }
 }

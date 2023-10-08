@@ -20,7 +20,7 @@ void main() => runApp(MaterialApp(
     '/add-therapy':(context) => const newTherapy(),
     '/user': (context) => const UserEdit(),
     '/report-bug':(context) => const ReportBug(),
-    '/add-family-members':(context) => const AddFamilyMember(),
+    '/add-family-member':(context) => const AddFamilyMember(),
     '/edit-family-settings':(context) => const EditFamily(),
 
   },
