@@ -15,7 +15,7 @@ class _SettingsState extends State<Settings> {
       
       backgroundColor: Colors.grey[900],
       body: SafeArea(
-        minimum: EdgeInsets.only(top: 35, left: 20),
+        minimum: const EdgeInsets.only(top: 35, left: 20),
         child: SingleChildScrollView(
           child: Column(
       
@@ -31,50 +31,50 @@ class _SettingsState extends State<Settings> {
                       ),
                     
                   ),
-                  Expanded(child: CircleAvatar(radius: 28,), flex: 1,)
+                  Expanded(flex: 1,child: CircleAvatar(radius: 28,),)
                 ],
               ),
-              SizedBox(height: 25,),
+              const SizedBox(height: 25,),
               Row(mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(onPressed: () {
                   Navigator.pushNamed(context, '/user');
                   }, 
-                  child: Text('Edit Account', style: TextStyle(fontSize: 20),),
+                  child: const Text('Edit Account', style: TextStyle(fontSize: 20),),
                   )
               ],
               ),
-              SizedBox(height: 25,),
+              const SizedBox(height: 25,),
               Row(mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(onPressed: () {
                   Navigator.pushNamed(context, '/edit-family-settings');
                   }, 
-                  child: Text('Edit Family Settings', style: TextStyle(fontSize: 20),),
+                  child: const Text('Edit Family Settings', style: TextStyle(fontSize: 20),),
                   )
               ],
               ),
-              SizedBox(height: 25,),
+              const SizedBox(height: 25,),
               Row(mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(onPressed: () {
                   Navigator.pushNamed(context, '/add-family-member');
                   }, 
-                  child: Text('Add Family Member', style: TextStyle(fontSize: 20),),
+                  child: const Text('Add Family Member', style: TextStyle(fontSize: 20),),
                   )
               ],
               ),
-              SizedBox(height: 25,),
+              const SizedBox(height: 25,),
               Row(mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(onPressed: () {
                   Navigator.pushNamed(context, '/report-bug');
                   }, 
-                  child: Text('Report Bug', style: TextStyle(fontSize: 20),),
+                  child: const Text('Report Bug', style: TextStyle(fontSize: 20),),
                   )
               ],
               ),
-              SizedBox(height: 25,),
+              const SizedBox(height: 25,),
             ],
              
           ),

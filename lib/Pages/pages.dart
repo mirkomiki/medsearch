@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/home.dart';
 import 'package:medsearch/Pages/newTherapy.dart';
 import 'package:medsearch/Pages/settings.dart';
-import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
-import 'package:medsearch/TypesOfData/therapy.dart';
 
 class Pages extends StatefulWidget {
   const Pages({super.key});
@@ -59,7 +57,7 @@ class _PagesState extends State<Pages> {
           ],  
           currentIndex: selectedIndex,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromARGB(255, 26, 26, 26),
+          backgroundColor: const Color.fromARGB(255, 26, 26, 26),
           unselectedItemColor: const Color.fromARGB(129, 255, 255, 255),
           selectedItemColor: Colors.white,
           onTap: onTapped,
