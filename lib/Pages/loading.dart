@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -19,7 +18,7 @@ class _LoadingState extends State<Loading> {
         backgroundColor: const Color.fromARGB(255, 26, 26, 26),
         
         splashIconSize: 500,
-        duration: 6000,
+        duration: 3000,
         splash: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
+import 'package:medsearch/globals.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -10,12 +11,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  List<Therapy> therapies = [
-    Therapy('Sinersul', 500, 1, 20),
-    Therapy('Brufen', 1000, 2, 40),
-    Therapy('Redbull', 330, 1, 1)
-  ];
-
+  
   @override
   Widget build(BuildContext context) {
     
