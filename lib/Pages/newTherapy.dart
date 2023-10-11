@@ -54,7 +54,6 @@ class _newTherapyState extends State<newTherapy> {
                   child: SingleChildScrollView(
                     child: 
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         const Padding(padding: EdgeInsets.all(10)),
