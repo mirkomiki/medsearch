@@ -1,171 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
-class editTherapy extends StatefulWidget {
-  const editTherapy({super.key});
-
+class EditTherapy extends StatefulWidget {
+  final Therapy therapy;
+  const EditTherapy({super.key, required this.therapy});
   @override
-  State<editTherapy> createState() => _editTherapyState();
+  State<EditTherapy> createState() => _EditTherapyState();
 }
 
-class _editTherapyState extends State<editTherapy> {
-  
-  TimeOfDay time = TimeOfDay.now();
-  int index = 1;
+class _EditTherapyState extends State<EditTherapy> {
   TextEditingController nameController = TextEditingController();
-  TextEditingController pillsADayController = TextEditingController();
-  TextEditingController pillsInBottleController = TextEditingController();
   TextEditingController dosageController = TextEditingController();
-  late String name = nameController.text;
-  late int? pillsADay = int.tryParse(pillsADayController.text);
-  late int? dosage = int.tryParse(dosageController.text);
-  late int? pillsInBottle= int.tryParse(pillsInBottleController.text);
-  void finishAddTherapy(){
-      therapies.add(Therapy(name, dosage, pillsADay, pillsInBottle));
-      // ignore: avoid_print
-      
-  }
-  
+  TextEditingController pillsAvaliableController = TextEditingController();
+  TextEditingController timesADayController = TextEditingController();
 
-  
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = widget.therapy.name;
+    dosageController.text = widget.therapy.dosage.toString();
+    pillsAvaliableController.text = widget.therapy.pillsAvaliable.toString();
+    timesADayController.text = widget.therapy.timesADay.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final hours = time.hour.toString().padLeft(2, '0');
-    final minutes = time.minute.toString().padLeft(2, '0');
-      return GestureDetector(
-        onTap: () {
-         FocusScope.of(context).requestFocus(FocusNode());
-      },
-        child: Scaffold(
-              backgroundColor: Colors.grey[900],
-              appBar: AppBar(
-                title: const Text('Create New Therapy'),
-                backgroundColor: const Color.fromARGB(255, 0, 164, 164),
-              ),
-              body: Form(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: SingleChildScrollView(
-                    child: 
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.all(10)),
-                        TextFormField(
-                          style: const TextStyle(color: Colors.white),
-                          focusNode: FocusNode(),
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),  
-                            labelText: 'Enter name of therapy...', 
-                            labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),
-                            filled: true,
-                            fillColor: const Color.fromARGB(255, 26, 26, 26)
-                            ),
-                            controller: nameController,
-                        ),
-                        const Padding(padding: EdgeInsets.all(15)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget> [
-                            Flexible(
-                              child: TextFormField(
-                              style: const TextStyle(color: Colors.white),
-                              focusNode: FocusNode(),
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),  
-                                labelText: 'Daily pills...', 
-                                labelStyle: TextStyle(
-                                    fontStyle: FontStyle.italic,color: Colors.grey[500]),
-                                filled: true,
-                                fillColor: const Color.fromARGB(255, 26, 26, 26)
-                                ),
-                                controller: pillsADayController,
-                                
-                                keyboardType: const TextInputType.numberWithOptions(decimal: false),
-                                  ),
-                              ),
-                            const Padding(padding: EdgeInsets.all(15)),
-                            Flexible(
-                              child: TextFormField(
-                              style: const TextStyle(color: Colors.white),  
-                              focusNode: FocusNode(),
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),  
-                                labelText: 'Dosage...', 
-                                labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),
-                                filled: true,
-                                fillColor: const Color.fromARGB(255, 26, 26, 26),
-                                ),
-                                controller: dosageController,
-                                keyboardType: const TextInputType.numberWithOptions(decimal: false),
-                                ),
-                            ),
-                          ],
-                        ),
-                        const Padding(padding: EdgeInsets.all(15)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          
-                        children: <Widget> [
-                            Flexible(
-                              child: TextFormField(
-                              style: const TextStyle(color: Colors.white),
-                              focusNode: FocusNode(),
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),  
-                                labelText: 'Current number of pills in bottle...', 
-                                labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),
-                                filled: true,
-                                fillColor: const Color.fromARGB(255, 26, 26, 26)
-                                ),
-                                controller: pillsInBottleController,
-                                keyboardType: const TextInputType.numberWithOptions(decimal: false),
-                                  ),
-                              ),
-                            
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Therapy'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(controller: nameController, decoration: InputDecoration(labelText: 'Name')),
+            TextField(controller: dosageController, decoration: InputDecoration(labelText: 'Dosage (mg)')),
+            TextField(controller: pillsAvaliableController, decoration: InputDecoration(labelText: 'Frequency')),
+            TextField(controller: timesADayController, decoration: InputDecoration(labelText: 'Duration (days)')),
+            ElevatedButton(
+              onPressed: () {
+                // Update the therapy object with the edited values
+                widget.therapy.name = nameController.text;
+                widget.therapy.dosage = int.parse(dosageController.text);
+                widget.therapy.pillsAvaliable = int.parse(pillsAvaliableController.text);
+                widget.therapy.timesADay = int.parse(timesADayController.text);
 
-                          ],
-                        ),
-                        const Padding(padding: EdgeInsets.all(10)),
-                        
-                        Row(
-                          children: <Widget>[
-                            Text('$hours:$minutes', style: const TextStyle(fontSize: 20, color: Colors.white),),
-                            const Padding(padding: EdgeInsets.all(10)),
-                            ElevatedButton(
-                              onPressed: () async{
-                                TimeOfDay? newTime = await showTimePicker(
-                                  context: context, 
-                                  builder: (context, child) {
-                                    return Theme(data: ThemeData.dark().copyWith(
-                                      dialogBackgroundColor: const Color.fromARGB(255, 32, 32, 32),
-                                      
-                                    ),
-                                    child: child!);
-                                  },
-                                  initialTime: time);
-                                  if(newTime == null) return;
-                                  setState(() =>
-                                    time = newTime);                      
-                                  }, 
-                              child: Text('Select other time for reminder $index')
-                              ),
-                          ],
-                        ),
-                        ElevatedButton(
-                          onPressed: () {finishAddTherapy();}, 
-                          child: const Text('Finish change')),
-      
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            
+                // Navigate back to the previous page with the updated therapy object
+                Navigator.of(context).pop(widget.therapy);
+              },
+              child: Text('Save Changes'),
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }
+
+
+
+
+//CREDIT TO CHATGPT == GRESKA JE BIO MOJ UPIS NA RACUNARSTVO

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medsearch/Pages/editTherapyView.dart';
 import 'package:medsearch/TypesOfData/infoTherapyCard.dart';
 import 'package:medsearch/globals.dart';
 
@@ -25,7 +26,18 @@ class _FullTherapyState extends State<FullTherapy> {
               (therapy) => infoTherapyCard( 
                 therapy: therapy, 
                 edit: () => 
-                  Navigator.pop(context, '/edit-therapy'),
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => EditTherapy(therapy: therapy,), // selectedTherapy is the therapy object to edit
+                    ),
+                  ).then((updatedTherapy) {
+                    if (updatedTherapy != null) {
+                      // Handle the updated therapy object (e.g., replace it in the list)
+                      setState(() {
+                        therapy = updatedTherapy;
+                      });
+                    }
+                  }),
                 delete: () {
                 setState(() {
                   therapies.remove(therapy);
