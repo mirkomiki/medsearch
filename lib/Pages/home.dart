@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
-import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
 class Home extends StatefulWidget {
   const Home({super.key});

@@ -1,8 +1,9 @@
-import 'dart:js_interop_unsafe';
+
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:medsearch/Pages/home.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
-import 'package:medsearch/Pages/home.dart' as home;
 import 'package:medsearch/globals.dart';
 class newTherapy extends StatefulWidget {
   const newTherapy({super.key});
@@ -19,8 +20,20 @@ class _newTherapyState extends State<newTherapy> {
   TextEditingController pillsADayController = TextEditingController();
   TextEditingController pillsInBottleController = TextEditingController();
   TextEditingController dosageController = TextEditingController();
-  
-  
+  late String name = nameController.text;
+  late int? pillsADay = int.tryParse(pillsADayController.text);
+  late int? dosage = int.tryParse(dosageController.text);
+  late int? pillsInBottle= int.tryParse(pillsInBottleController.text);
+  void finishAddTherapy(){
+      therapies.add(Therapy(name, dosage, pillsADay, pillsInBottle));
+      // ignore: avoid_print
+      print(therapies);
+      nameController = TextEditingController();
+      pillsADayController = TextEditingController();
+      pillsInBottleController = TextEditingController();
+      dosageController = TextEditingController();
+
+  }
 
   
   @override
@@ -29,7 +42,7 @@ class _newTherapyState extends State<newTherapy> {
     final minutes = time.minute.toString().padLeft(2, '0');
       return GestureDetector(
         onTap: () {
-         FocusScope.of(context).requestFocus(new FocusNode());
+         FocusScope.of(context).requestFocus(FocusNode());
       },
         child: Scaffold(
               backgroundColor: Colors.grey[900],
@@ -46,9 +59,9 @@ class _newTherapyState extends State<newTherapy> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Padding(padding: EdgeInsets.all(10)),
+                        const Padding(padding: EdgeInsets.all(10)),
                         TextFormField(
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           focusNode: FocusNode(),
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),  
@@ -59,46 +72,46 @@ class _newTherapyState extends State<newTherapy> {
                             ),
                             controller: nameController,
                         ),
-                        Padding(padding: EdgeInsets.all(15)),
+                        const Padding(padding: EdgeInsets.all(15)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget> [
                             Flexible(
                               child: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               focusNode: FocusNode(),
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),  
                                 labelText: 'Daily pills...', 
-                                labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),
+                                labelStyle: TextStyle(
+                                    fontStyle: FontStyle.italic,color: Colors.grey[500]),
                                 filled: true,
                                 fillColor: const Color.fromARGB(255, 26, 26, 26)
                                 ),
                                 controller: pillsADayController,
-                                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                                keyboardType: const TextInputType.numberWithOptions(decimal: false),
                                   ),
                               ),
-                            Padding(padding: EdgeInsets.all(15)),
+                            const Padding(padding: EdgeInsets.all(15)),
                             Flexible(
                               child: TextFormField(
-                              style: TextStyle(color: Colors.white),  
+                              style: const TextStyle(color: Colors.white),  
                               focusNode: FocusNode(),
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),  
                                 labelText: 'Dosage...', 
                                 labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),
-                                
                                 filled: true,
                                 fillColor: const Color.fromARGB(255, 26, 26, 26),
                                 ),
                                 controller: dosageController,
-                                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                                keyboardType: const TextInputType.numberWithOptions(decimal: false),
                                 ),
                             ),
                           ],
                         ),
-                        Padding(padding: EdgeInsets.all(15)),
+                        const Padding(padding: EdgeInsets.all(15)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +119,7 @@ class _newTherapyState extends State<newTherapy> {
                         children: <Widget> [
                             Flexible(
                               child: TextFormField(
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               focusNode: FocusNode(),
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),  
@@ -116,19 +129,19 @@ class _newTherapyState extends State<newTherapy> {
                                 fillColor: const Color.fromARGB(255, 26, 26, 26)
                                 ),
                                 controller: pillsInBottleController,
-                                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                                keyboardType: const TextInputType.numberWithOptions(decimal: false),
                                   ),
                               ),
                             
 
                           ],
                         ),
-                        Padding(padding: EdgeInsets.all(10)),
+                        const Padding(padding: EdgeInsets.all(10)),
                         
                         Row(
                           children: <Widget>[
-                            Text('$hours:$minutes', style: TextStyle(fontSize: 20, color: Colors.white),),
-                            Padding(padding: EdgeInsets.all(10)),
+                            Text('$hours:$minutes', style: const TextStyle(fontSize: 20, color: Colors.white),),
+                            const Padding(padding: EdgeInsets.all(10)),
                             ElevatedButton(
                               onPressed: () async{
                                 TimeOfDay? newTime = await showTimePicker(
@@ -150,8 +163,8 @@ class _newTherapyState extends State<newTherapy> {
                           ],
                         ),
                         ElevatedButton(
-                          onPressed: () {getTherapies().add(Therapy(nameController.text.toString(), dosageController.text as int, pillsADayController.text as int, pillsInBottleController.text as int),);}, 
-                          child: Text('Generate')),
+                          onPressed: () {finishAddTherapy();}, 
+                          child: const Text('Finish')),
       
                       ],
                     ),
