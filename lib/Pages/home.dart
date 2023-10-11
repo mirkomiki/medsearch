@@ -17,9 +17,9 @@ class _HomeState extends State<Home> {
     return Scaffold(
     backgroundColor: Colors.grey[900],
     appBar: AppBar(
-      title: const Text('Smart therapy tracker'),
+      title:  Image.asset('assets/rsz_transparent_logo_small.png',),
       centerTitle: true,
-      backgroundColor: const Color.fromARGB(255, 196, 82, 135),
+      backgroundColor: Colors.grey[900],
     ),
     body: 
     

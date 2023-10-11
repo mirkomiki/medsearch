@@ -1,16 +1,14 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
-class newTherapy extends StatefulWidget {
-  const newTherapy({super.key});
+class editTherapy extends StatefulWidget {
+  const editTherapy({super.key});
 
   @override
-  State<newTherapy> createState() => _newTherapyState();
+  State<editTherapy> createState() => _editTherapyState();
 }
 
-class _newTherapyState extends State<newTherapy> {
+class _editTherapyState extends State<editTherapy> {
   
   TimeOfDay time = TimeOfDay.now();
   int index = 1;
@@ -26,12 +24,8 @@ class _newTherapyState extends State<newTherapy> {
       therapies.add(Therapy(name, dosage, pillsADay, pillsInBottle));
       // ignore: avoid_print
       
-      nameController = TextEditingController();
-      pillsADayController = TextEditingController();
-      pillsInBottleController = TextEditingController();
-      dosageController = TextEditingController();
-
   }
+  
 
   
   @override
@@ -88,6 +82,7 @@ class _newTherapyState extends State<newTherapy> {
                                 fillColor: const Color.fromARGB(255, 26, 26, 26)
                                 ),
                                 controller: pillsADayController,
+                                
                                 keyboardType: const TextInputType.numberWithOptions(decimal: false),
                                   ),
                               ),
@@ -162,7 +157,7 @@ class _newTherapyState extends State<newTherapy> {
                         ),
                         ElevatedButton(
                           onPressed: () {finishAddTherapy();}, 
-                          child: const Text('Finish')),
+                          child: const Text('Finish change')),
       
                       ],
                     ),

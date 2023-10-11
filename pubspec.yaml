@@ -70,7 +70,10 @@ flutter:
     - assets/scary_man.jpg
     - assets/logo.png
     - assets/transparent_logo.png
-
+    - assets/transparent_logo_small.png
+    - assets/rsz_50transparent_logo_small.png
+    - assets/rsz_25transparent_logo_small.png
+    - assets/rsz_transparent_logo_small.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

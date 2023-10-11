@@ -1,4 +1,6 @@
 
+
+import 'package:medsearch/Pages/editTherapyView.dart';
 import 'package:medsearch/Pages/fullTherapyView.dart';
 import 'package:medsearch/Pages/loading.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ void main() => runApp(MaterialApp(
     '/report-bug':(context) => const ReportBug(),
     '/add-family-member':(context) => const AddFamilyMember(),
     '/edit-family-settings':(context) => const EditFamily(),
-
+    '/edit-therapy':(context) => const editTherapy(),
   },
 )
 );
