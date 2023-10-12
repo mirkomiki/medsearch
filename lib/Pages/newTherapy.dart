@@ -40,7 +40,7 @@ class _newTherapyState extends State<newTherapy> {
       dosageController = TextEditingController();
        Navigator.push(context,
       MaterialPageRoute(builder: (context) => const Home()));
-
+ 
   }
   @override
   Widget build(BuildContext context) {
@@ -161,14 +161,6 @@ class _newTherapyState extends State<newTherapy> {
                           ],
                         ),
                         
-                        
-
-
-
-
-
-
-                        
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////
                         const Padding(padding: EdgeInsets.all(10)),
                         Row(
@@ -195,7 +187,7 @@ class _newTherapyState extends State<newTherapy> {
                                       time = newTime);                      
                                     }, 
                                 child: Text('Select time for reminder $index')
-                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -207,11 +199,8 @@ class _newTherapyState extends State<newTherapy> {
                     
                   ),
                 ),
-              
-              ),
-            
+              ),         
         ),
-        
       );
       
   }
