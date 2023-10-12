@@ -41,6 +41,7 @@ dependencies:
   flutter_spinkit: ^5.2.0
   persistent_bottom_nav_bar: ^5.0.2
   syncfusion_flutter_datepicker: ^23.1.40
+  flutter_form_builder: ^9.1.1
 
 dev_dependencies:
   flutter_test:

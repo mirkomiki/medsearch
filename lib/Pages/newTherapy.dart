@@ -3,12 +3,14 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:medsearch/Pages/home.dart';
 import 'package:medsearch/Pages/pages.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+const List<String> dailyPillsItemList = <String>['1', '2', '3', '4', '5', '6'];
 class newTherapy extends StatefulWidget {
   const newTherapy({super.key});
 
@@ -20,6 +22,12 @@ class _newTherapyState extends State<newTherapy> {
   DateTime endDate = DateTime.now().add(const Duration(days: 1));
   DateTime startDate = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
+  String selectedValue = '1';
+  
+
+  
+
+
   int index = 1;
   TextEditingController nameController = TextEditingController();
   TextEditingController pillsADayController = TextEditingController();
@@ -83,7 +91,8 @@ class _newTherapyState extends State<newTherapy> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget> [
                             Flexible(
-                              child: TextFormField(style: const TextStyle(color: Colors.white),focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Daily pills...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26)),controller: pillsADayController,keyboardType: const TextInputType.numberWithOptions(decimal: false),),
+                              child: TextFormField(style: const TextStyle(color: Colors.white),focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Current number of pills in bottle...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26)),controller: pillsInBottleController,keyboardType: const TextInputType.numberWithOptions(decimal: false),),
+                              
                               ),
                             const Padding(padding: EdgeInsets.all(15)),
                             Flexible(
@@ -92,15 +101,33 @@ class _newTherapyState extends State<newTherapy> {
                           ],
                         ),
                         const Padding(padding: EdgeInsets.all(15)),
+                        
+                        
+                        
+                        
+                        
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget> [
-                            Flexible(
-                              child: TextFormField(style: const TextStyle(color: Colors.white),focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Current number of pills in bottle...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26)),controller: pillsInBottleController,keyboardType: const TextInputType.numberWithOptions(decimal: false),),
+                          children: <Widget> [
+                              Flexible(
+                                  child: DropdownButton<String>(value: selectedValue, onChanged: (String? value) {
+                                      // This is called when the user selects an item.
+                                      setState(() {
+                                        selectedValue = value!;
+                                      });
+                                    },
+                                    items: dailyPillsItemList.map<DropdownMenuItem<String>>((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    },
+                                  ).toList(),
+                                ),
                               ),
-                          ],
-                        ),
+                            ], 
+                          ),
                         const Padding(padding: EdgeInsets.all(10)),
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////
                          Row(

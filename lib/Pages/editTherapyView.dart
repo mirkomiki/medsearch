@@ -191,8 +191,6 @@ class _EditTherapyState extends State<EditTherapy> {
   }
 }
 
-mixin endDate {
-}
 
 
 
