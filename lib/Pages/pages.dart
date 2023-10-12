@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/home.dart';
 import 'package:medsearch/Pages/newTherapy.dart';
 import 'package:medsearch/Pages/settings.dart';
+import 'package:medsearch/globals.dart';
 
 class Pages extends StatefulWidget {
   const Pages({super.key});
@@ -13,11 +14,11 @@ class Pages extends StatefulWidget {
   
 
 class _PagesState extends State<Pages> {
-  int selectedIndex = 0;
+  
   
   void onTapped(int index){
       setState(() {
-        selectedIndex = index;
+        selectedPageIndex = index;
       });
     }
   
@@ -27,11 +28,12 @@ class _PagesState extends State<Pages> {
     const newTherapy(),
     const Settings(),
   ];
-
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages.elementAt(selectedIndex),
+      body: _pages.elementAt(selectedPageIndex),
       backgroundColor: Colors.grey[900],
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
@@ -55,7 +57,7 @@ class _PagesState extends State<Pages> {
               ),
               
           ],  
-          currentIndex: selectedIndex,
+          currentIndex: selectedPageIndex,
           type: BottomNavigationBarType.fixed,
           backgroundColor: const Color.fromARGB(255, 26, 26, 26),
           unselectedItemColor: const Color.fromARGB(129, 255, 255, 255),

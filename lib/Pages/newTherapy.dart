@@ -4,6 +4,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/home.dart';
+import 'package:medsearch/Pages/pages.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -38,8 +39,11 @@ class _newTherapyState extends State<newTherapy> {
       pillsADayController = TextEditingController();
       pillsInBottleController = TextEditingController();
       dosageController = TextEditingController();
-       Navigator.push(context,
-      MaterialPageRoute(builder: (context) => const Home()));
+      selectedPageIndex = 0;
+      Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => const Pages()),
+  );
  
   }
   @override
@@ -163,6 +167,7 @@ class _newTherapyState extends State<newTherapy> {
                         
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////
                         const Padding(padding: EdgeInsets.all(10)),
+                        
                         Row(
                           children: <Widget>[
                             const Padding(padding: EdgeInsets.all(10)),

@@ -2,6 +2,7 @@
 
 import 'package:medsearch/Pages/editTherapyView.dart';
 import 'package:medsearch/Pages/fullTherapyView.dart';
+import 'package:medsearch/Pages/home.dart';
 import 'package:medsearch/Pages/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/newTherapy.dart';
@@ -20,7 +21,6 @@ void main() => runApp(MaterialApp(
     '/pages': (context) => const Pages(),
     '/full-therapy': (context) => const FullTherapy(),
     '/reminders': (context) => const Reminders(),
-    '/add-therapy':(context) => const newTherapy(),
     '/user': (context) => const UserEdit(),
     '/report-bug':(context) => const ReportBug(),
     '/add-family-member':(context) => const AddFamilyMember(),

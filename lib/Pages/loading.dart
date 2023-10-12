@@ -18,7 +18,7 @@ class _LoadingState extends State<Loading> {
         backgroundColor: const Color.fromARGB(255, 26, 26, 26),
         
         splashIconSize: 500,
-        duration: 3000,
+        duration: 1000,
         splash: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
