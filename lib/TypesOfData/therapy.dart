@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 class Therapy{
   //Attributes
   String name = '';
   int? dosage = 0;
   int? timesADay = 0;
-  List<DateTime> timeToTake = []; //koliko puta dnevno
+  List<TimeOfDay> timeToTake = []; //koliko puta dnevno
   late DateTime overallTakingTime; //dokad se uzima
   int? pillsAvaliable = 0;
   DateTime lastDay = DateTime.now();

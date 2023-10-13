@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
-import 'package:medsearch/globals.dart';
 
 class EditTherapy extends StatefulWidget {
   final Therapy therapy;
@@ -49,7 +48,7 @@ class _EditTherapyState extends State<EditTherapy> {
       child: Scaffold(
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
-          title: Text('Edit Therapy'),
+          title: const Text('Edit Therapy'),
           backgroundColor: const Color.fromARGB(255, 0, 164, 164),
         ),
         body: Form(
@@ -101,7 +100,7 @@ class _EditTherapyState extends State<EditTherapy> {
                                     setState(() =>
                                       startDate = firstDay);                      
                                     }, 
-                                child: Text('Choose start date')
+                                child: const Text('Choose start date')
                                 ),
                             ),
                           ],

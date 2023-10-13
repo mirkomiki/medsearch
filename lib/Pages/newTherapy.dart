@@ -1,14 +1,10 @@
 
 
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:medsearch/Pages/home.dart';
-import 'package:medsearch/Pages/pages.dart';
+import 'package:medsearch/Pages/setReminders.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 const List<String> dailyPillsItemList = <String>['1', '2', '3', '4', '5', '6'];
 class newTherapy extends StatefulWidget {
@@ -40,23 +36,24 @@ class _newTherapyState extends State<newTherapy> {
   late int? pillsInBottle= int.tryParse(pillsInBottleController.text);
 
   void finishAddTherapy(){
+      
       therapies.add(Therapy(name, dosage, pillsADay, pillsInBottle, startDate, endDate));
       // ignore: avoid_print
-      
+      globalDailyReminders = pillsADay!;
       nameController = TextEditingController();
       pillsADayController = TextEditingController();
       pillsInBottleController = TextEditingController();
       dosageController = TextEditingController();
       selectedPageIndex = 0;
-      Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (context) => const Pages()),
-  );
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => SetReminders(listSize: globalDailyReminders),),
+          );
+      
+      
  
   }
   @override
   Widget build(BuildContext context) {
-    
     final hours = time.hour.toString().padLeft(2, '0');
     final minutes = time.minute.toString().padLeft(2, '0');
     final eday = endDate.day.toString();
@@ -100,12 +97,7 @@ class _newTherapyState extends State<newTherapy> {
                             ),
                           ],
                         ),
-                        const Padding(padding: EdgeInsets.all(15)),
-                        
-                        
-                        
-                        
-                        
+                        const Padding(padding: EdgeInsets.all(15)),                      
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,7 +147,7 @@ class _newTherapyState extends State<newTherapy> {
                                     setState(() =>
                                       startDate = firstDay);                      
                                     }, 
-                                child: Text('Choose start date')
+                                child: const Text('Choose start date')
                                 ),
                             ),
                           ],
@@ -197,9 +189,9 @@ class _newTherapyState extends State<newTherapy> {
                         
                         Row(
                           children: <Widget>[
-                            const Padding(padding: EdgeInsets.all(10)),
+                            
                             Expanded(flex: 1,child: Text('$hours:$minutes', style: const TextStyle(fontSize: 20, color: Colors.white),)),
-                            const Padding(padding: EdgeInsets.all(10)),
+                            
                             Expanded(
                               flex: 4,
                               child: ElevatedButton(
@@ -225,14 +217,28 @@ class _newTherapyState extends State<newTherapy> {
                         ),
                         ElevatedButton(
                           onPressed: () {finishAddTherapy();}, 
-                          child: const Text('Finish')),
+                          child: const Text('NEXT')),
                       ],
                     ),
                     
                   ),
                 ),
               ),         
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            
+            Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => SetReminders(listSize: globalDailyReminders),),
+                  
+                  );
+              },
+          
+          foregroundColor: Colors.cyan,
+          backgroundColor: Colors.black,
+          child: const Icon(Icons.arrow_right_alt, size: 40,),
+          ), 
         ),
+        
       );
       
   }

@@ -1,14 +1,10 @@
 
 
-import 'package:medsearch/Pages/editTherapyView.dart';
 import 'package:medsearch/Pages/fullTherapyView.dart';
-import 'package:medsearch/Pages/home.dart';
 import 'package:medsearch/Pages/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:medsearch/Pages/newTherapy.dart';
 import 'package:medsearch/Pages/pages.dart';
 import 'package:medsearch/SettingsPages/userAccount.dart';
-import 'package:medsearch/globals.dart';
 import 'Pages/reminders.dart';
 import 'SettingsPages/addFamilyMember.dart';
 import 'SettingsPages/familyView.dart';
