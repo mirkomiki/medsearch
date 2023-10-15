@@ -2,6 +2,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:medsearch/Pages/TimePickerWidget.dart';
+import 'package:medsearch/Pages/pages.dart';
 import 'package:medsearch/Pages/setReminders.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
@@ -17,45 +19,43 @@ class newTherapy extends StatefulWidget {
 class _newTherapyState extends State<newTherapy> {
   DateTime endDate = DateTime.now().add(const Duration(days: 1));
   DateTime startDate = DateTime.now();
-  TimeOfDay time = TimeOfDay.now();
-  String selectedValue = '1';
   
+  List<TimeOfDay> reminderList = [TimeOfDay.now()];
 
   
 
 
   int index = 1;
   TextEditingController nameController = TextEditingController();
-  TextEditingController pillsADayController = TextEditingController();
+  
+  late int? pillsADay = 1;
   TextEditingController pillsInBottleController = TextEditingController();
   TextEditingController dosageController = TextEditingController();
 
   late String name = nameController.text;
-  late int? pillsADay = int.tryParse(pillsADayController.text);
+  
   late int? dosage = int.tryParse(dosageController.text);
   late int? pillsInBottle= int.tryParse(pillsInBottleController.text);
 
   void finishAddTherapy(){
-      
-      therapies.add(Therapy(name, dosage, pillsADay, pillsInBottle, startDate, endDate));
+      therapies.add(Therapy(name, dosage, pillsADay, pillsInBottle, startDate, endDate, reminderList));
       // ignore: avoid_print
-      globalDailyReminders = pillsADay!;
       nameController = TextEditingController();
-      pillsADayController = TextEditingController();
       pillsInBottleController = TextEditingController();
       dosageController = TextEditingController();
       selectedPageIndex = 0;
-      Navigator.push(context, MaterialPageRoute(
-          builder: (context) => SetReminders(listSize: globalDailyReminders),),
-          );
+      reminderList = [TimeOfDay.now()];
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Pages()),
+      );
+      print(therapies.last.timeToTake.elementAt(0));
       
       
  
   }
   @override
   Widget build(BuildContext context) {
-    final hours = time.hour.toString().padLeft(2, '0');
-    final minutes = time.minute.toString().padLeft(2, '0');
     final eday = endDate.day.toString();
     final emonth = endDate.month.toString();
     final eyear = endDate.year.toString();
@@ -103,19 +103,20 @@ class _newTherapyState extends State<newTherapy> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget> [
                               Flexible(
-                                  child: DropdownButton<String>(value: selectedValue, onChanged: (String? value) {
+                                  child: DropdownButton<int>(value: pillsADay, onChanged: (int? value) {
                                       // This is called when the user selects an item.
                                       setState(() {
-                                        selectedValue = value!;
+                                        pillsADay = value!;
+                                        _updateReminderList();
                                       });
                                     },
-                                    items: dailyPillsItemList.map<DropdownMenuItem<String>>((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
+                                    items: List.generate(6, (index) {
+                                      return DropdownMenuItem<int>(
+                                        value: index + 1,
+                                        child: Text((index + 1).toString()),
                                       );
                                     },
-                                  ).toList(),
+                                    ),
                                 ),
                               ),
                             ], 
@@ -187,59 +188,55 @@ class _newTherapyState extends State<newTherapy> {
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////
                         const Padding(padding: EdgeInsets.all(10)),
                         
-                        Row(
-                          children: <Widget>[
-                            
-                            Expanded(flex: 1,child: Text('$hours:$minutes', style: const TextStyle(fontSize: 20, color: Colors.white),)),
-                            
-                            Expanded(
-                              flex: 4,
-                              child: ElevatedButton(
-                                onPressed: () async{
-                                  TimeOfDay? newTime = await showTimePicker(
-                                    context: context, 
-                                    builder: (context, child) {
-                                      return Theme(data: ThemeData.dark().copyWith(
-                                        dialogBackgroundColor: const Color.fromARGB(255, 32, 32, 32),
-                                        
-                                      ),
-                                      child: child!);
-                                    },
-                                    initialTime: time);
-                                    if(newTime == null) return;
-                                    setState(() =>
-                                      time = newTime);                      
-                                    }, 
-                                child: Text('Select time for reminder $index')
-                              ),
-                            ),
-                          ],
-                        ),
-                        ElevatedButton(
-                          onPressed: () {finishAddTherapy();}, 
-                          child: const Text('NEXT')),
+                      SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      itemCount: pillsADay,
+                      itemBuilder: (context, index) {
+                        return TimePickerWidget(
+                          indexTherapy: index,
+                          timeOfDay: reminderList[index],
+                          onChanged: (newTime) {
+                            setState(() {
+                              reminderList[index] = newTime;
+                            });
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                      ElevatedButton(
+                            onPressed: () {finishAddTherapy();}, 
+                            child: const Text('NEXT')),
                       ],
                     ),
                     
                   ),
                 ),
-              ),         
-        floatingActionButton: FloatingActionButton(
+              ) ,      
+        /* floatingActionButton: FloatingActionButton(
           onPressed: () {
             
-            Navigator.push(context, MaterialPageRoute(
+            /* Navigator.push(context, MaterialPageRoute(
                   builder: (context) => SetReminders(listSize: globalDailyReminders),),
                   
-                  );
+                  ); */
               },
           
           foregroundColor: Colors.cyan,
           backgroundColor: Colors.black,
           child: const Icon(Icons.arrow_right_alt, size: 40,),
-          ), 
+          ), */
         ),
         
-      );
+      ); 
       
   }
+  void _updateReminderList() {
+    while (reminderList.length <= pillsADay!) {
+      reminderList.add(TimeOfDay.now());
+    }
+    
+  }
 }
+

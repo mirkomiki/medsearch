@@ -12,12 +12,13 @@ class Therapy{
   DateTime firstDay = DateTime.now();
   
   //Constructor
-  Therapy(String name, int? dosage, int? timesADay, int? pillsInBottle, firstDay, lastDay, ){
+  Therapy(String name, int? dosage, int? timesADay, int? pillsInBottle, firstDay, lastDay, List<TimeOfDay>timeToTake){
     this.name = name;
     this.dosage = dosage;
     this.timesADay = timesADay;
     pillsAvaliable = pillsInBottle;
     this.lastDay = lastDay;
     this.firstDay = firstDay;
+    this.timeToTake = timeToTake;
   }
 } 

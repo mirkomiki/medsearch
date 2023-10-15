@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/pages.dart';
 import 'package:medsearch/TypesOfData/makeReminderCard.dart';
 
@@ -6,7 +6,8 @@ import 'package:medsearch/TypesOfData/makeReminderCard.dart';
 class SetReminders extends StatelessWidget {
   int listSize;
   SetReminders({super.key, required this.listSize});
-  
+  List<TimeOfDay> reminderList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,30 +17,30 @@ class SetReminders extends StatelessWidget {
         title: const Text('Set Reminders'),
         backgroundColor: const Color.fromARGB(255, 0, 164, 164),
       ),
-      body: Column(
-        children: [
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: listSize, 
-            itemBuilder: (context, index) => MakeReminderCard(index: index),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: listSize, 
+              itemBuilder: (context, index) {
+                MakeReminderCard();
+                
+              },
+            ),
             
-          ),
-          ElevatedButton(
-            onPressed: () {       //vratiti u finish therapy ako bude problema
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Pages()),
-                  );
-
-            }, 
-            child: const Text('NEXT')),
-          ],
-        
-        
-
+            ElevatedButton(
+              onPressed: () {   
+                    //vratiti u finish therapy ako bude problema
+                
+              }, 
+              child: const Text('NEXT')),
+            ],
+          
+          
+      
+        ),
       ),
-
-
     );
   }
-}
+} */

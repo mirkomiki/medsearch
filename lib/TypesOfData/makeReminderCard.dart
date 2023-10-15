@@ -1,25 +1,32 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:medsearch/globals.dart';
 
 // ignore: must_be_immutable
 class MakeReminderCard extends StatefulWidget {
-  int index = 1;
 
-  MakeReminderCard({super.key, required this.index});
-
+  MakeReminderCard({super.key});
+  reminderList = therapies.elementAt(index).timeToTake;
   @override
   State<MakeReminderCard> createState() => _MakeReminderCardState();
 }
 
 class _MakeReminderCardState extends State<MakeReminderCard> {
   int reminderIndex = 0;
+  
+  
 
-  late TimeOfDay time = TimeOfDay.now();
 
   @override
   Widget build(BuildContext context) {
-    final hours = time.hour.toString().padLeft(2, '0');
-    final minutes = time.minute.toString().padLeft(2, '0');
+    final hours = reminderList.elementAt(reminderIndex).hour.toString().padLeft(2, '0');
+      final minutes = reminderList.elementAt(reminderIndex).minute.toString().padLeft(2, '0');  
+    if(reminderList.isNotEmpty){
+      final hours = TimeOfDay.now().hour.toString().padLeft(2, '0');
+      final minutes = TimeOfDay.now().minute.toString().padLeft(2, '0');
+    } 
+      
+    
+    
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,16 +46,22 @@ class _MakeReminderCardState extends State<MakeReminderCard> {
                   ),
                   child: child!);
                 },
-                initialTime: time);
+                initialTime: reminderList.elementAt(reminderIndex));
                 if(newTime == null) return;
-                setState(() =>
-                  time = newTime);                      
+                setState(() => {
+                  
+                  reminderList.add(newTime),
+                  setTherapiesReminder(reminderIndex, reminderList),
+                  
+
+                  },
+                  );                      
                 },  
-            child: Text('Change time for ${widget.index+1}. reminder'),
+            child: Text('Change time for reminder'),
           ),
           const Padding(padding: EdgeInsets.all(15)),
         ],
       ),
     );
   }
-} 
+}  */
