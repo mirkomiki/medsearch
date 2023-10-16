@@ -30,9 +30,7 @@ class _HomeState extends State<Home> {
   
   @override
   Widget build(BuildContext context) {
-    final todayReminders = filterTherapiesForToday();
-
-    
+    final todayReminders = filterTherapiesForToday(); 
     return Scaffold(
     backgroundColor: Colors.grey[900],
     appBar: AppBar(
@@ -66,26 +64,25 @@ class _HomeState extends State<Home> {
           height: 25,
           color: Colors.grey[900],
         ),
-        SizedBox(
-          
-          height: 500,
-          child: ListView.builder(
-          itemCount: todayReminders.length,
-          itemBuilder: (context, index) {
-            final therapy = todayReminders[index];
-            return ListTile(
-              title: Text(therapy.name),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: therapy.timeToTake
-                    .map((time) => Text('Reminder at ${time.format(context)}'))
-                    .toList(),
-                ),
+        SingleChildScrollView(
+          child: SizedBox(
+            height: 420,
+            child: ListView.builder(
+            itemCount: todayReminders.length,
+            itemBuilder: (context, index) {
+              final therapy = todayReminders[index];
+              return DailyTherapyCard(
+                therapy: therapy,
+                delete: () => 
+                setState(() {
+                therapies.remove(therapy);
+                }),
               );
-            },
+              
+              },
+            ),
           ),
-        
-      ),
+        ),
         
 
         /* Column(
@@ -100,9 +97,14 @@ class _HomeState extends State<Home> {
               })).toList(),
         ), */
         
-        
+        const Divider(
+          height: 5,
+        ),
+
         Row(
+          
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
@@ -134,7 +136,6 @@ class _HomeState extends State<Home> {
       ],
       ),
     ),
- 
   );
   }
 }

@@ -14,7 +14,7 @@ class TimePickerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
    
     return ListTile(
-      title: Text('Reminder ${timeOfDay.hour}:${timeOfDay.minute}'),
+      title: Text('Reminder ${timeOfDay.hour.toString().padLeft(2, '0')}:${timeOfDay.minute.toString().padLeft(2, '0')}'),
       trailing: ElevatedButton(
         onPressed: () async {
           final selectedTime = await showTimePicker(

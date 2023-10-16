@@ -4,34 +4,71 @@ import 'therapy.dart';
 class DailyTherapyCard extends StatelessWidget {
   final Function() delete;
   final Therapy therapy;
+  
   const DailyTherapyCard({super.key,  required this.therapy, required this.delete});
   
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(35),
       ),
       shadowColor: Colors.black,
       surfaceTintColor: Colors.amber,
-      color: const Color.fromARGB(255, 188, 123, 224),
-      margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+      color: const Color.fromARGB(255, 201, 206, 213),
+      margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
       child:
       
       Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
-            'Take: ${therapy.name}', 
-            style: const TextStyle(color: Colors.black, fontSize: 20),),
-            Text('Dosage:${therapy.dosage}',
-            style: const TextStyle(color: Colors.black, fontSize: 20),),
-            Text('Remaning pills:${therapy.pillsAvaliable}',
-            style: const TextStyle(color: Colors.black, fontSize: 20),),
-            const Text('When:',
-            style: TextStyle(color: Colors.black, fontSize: 20),),
+            Row(
+              
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                    '${therapy.name}', 
+                    style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text('Dosage: ${therapy.dosage} mg',
+                    style: const TextStyle(color: Colors.black, fontSize: 16),),
+                    Text('Remaning pills: ${therapy.pillsAvaliable}',
+                    style: const TextStyle(color: Colors.black, fontSize: 16),),
+                  ],
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                SizedBox(
+                  height: 60,
+                  width: 165,
+                  child: ListView.builder(
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: BoxDecoration(border: Border.all(),),
+                      child: ListTile(
+                        title: const Text('REMINDERS', style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: therapy.timeToTake
+                              .map((time) => Text('Reminder at ${time.format(context)}', style: const TextStyle(color: Colors.black, fontSize: 16),))
+                              .toList(),
+                          ),
+                        ),
+                    );
+                  },
+                    ),
+                  
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[

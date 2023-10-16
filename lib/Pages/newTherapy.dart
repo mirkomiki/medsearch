@@ -49,7 +49,6 @@ class _newTherapyState extends State<newTherapy> {
         context,
         MaterialPageRoute(builder: (context) => const Pages()),
       );
-      print(therapies.last.timeToTake.elementAt(0));
       
       
  
@@ -186,25 +185,25 @@ class _newTherapyState extends State<newTherapy> {
                         ),
                         
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        const Padding(padding: EdgeInsets.all(10)),
+                      const Padding(padding: EdgeInsets.all(10)),
                         
                       SizedBox(
-                    height: 300,
-                    child: ListView.builder(
-                      itemCount: pillsADay,
-                      itemBuilder: (context, index) {
-                        return TimePickerWidget(
-                          indexTherapy: index,
-                          timeOfDay: reminderList[index],
-                          onChanged: (newTime) {
-                            setState(() {
-                              reminderList[index] = newTime;
-                            });
+                        height: 300,
+                        child: ListView.builder(
+                          itemCount: pillsADay,
+                          itemBuilder: (context, index) {
+                            return TimePickerWidget(
+                              indexTherapy: index,
+                              timeOfDay: reminderList[index],
+                              onChanged: (newTime) {
+                                setState(() {
+                                  reminderList[index] = newTime;
+                                });
+                              },
+                            );
                           },
-                        );
-                      },
-                    ),
-                  ),
+                        ),
+                      ),
                       ElevatedButton(
                             onPressed: () {finishAddTherapy();}, 
                             child: const Text('NEXT')),

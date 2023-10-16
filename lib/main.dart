@@ -11,7 +11,6 @@ import 'SettingsPages/familyView.dart';
 import 'SettingsPages/reportBugs.dart';
 
 void main() => runApp(MaterialApp(
-  initialRoute:'/loading',
   routes: {
     '/': (context) => const Loading(),
     '/pages': (context) => const Pages(),
