@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
+import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -9,10 +10,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
+  
+  
+  List<Therapy> filterTherapiesForToday() {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    
+    final filteredTherapies = therapies.where((therapy) {
+      return therapy.firstDay.day <= today.day
+      && therapy.firstDay.month <= today.month
+      && therapy.firstDay.year <= today.year
+      && therapy.lastDay.year >= today.year
+      && therapy.lastDay.month >= today.month
+      && therapy.lastDay.day >= today.day;
+    },).toList();
+  
+    return filteredTherapies;
+  }
   
   @override
   Widget build(BuildContext context) {
+    final todayReminders = filterTherapiesForToday();
+
     
     return Scaffold(
     backgroundColor: Colors.grey[900],
@@ -47,7 +66,29 @@ class _HomeState extends State<Home> {
           height: 25,
           color: Colors.grey[900],
         ),
-        Column(
+        SizedBox(
+          
+          height: 500,
+          child: ListView.builder(
+          itemCount: todayReminders.length,
+          itemBuilder: (context, index) {
+            final therapy = todayReminders[index];
+            return ListTile(
+              title: Text(therapy.name),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: therapy.timeToTake
+                    .map((time) => Text('Reminder at ${time.format(context)}'))
+                    .toList(),
+                ),
+              );
+            },
+          ),
+        
+      ),
+        
+
+        /* Column(
           children:
             therapies.map(
               (therapy) => DailyTherapyCard(
@@ -57,7 +98,7 @@ class _HomeState extends State<Home> {
                   therapies.remove(therapy);
                 });
               })).toList(),
-        ),
+        ), */
         
         
         Row(
