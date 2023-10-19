@@ -1,6 +1,2 @@
 # medsearch
-
-Prati terapiju pacjenata
-\n
-busicmirko1@gmail.com
-poslati si ideje za dodati pa procjenjujemo
+Prati terapiju i svasta, mnoge funkciolanosti cemo dodati da bude razlicito, sve ideje saljite, molimo na modularnosti tj. neki custom widget napravi klasu za njega radije nego da radis svaki put isti == optimizacija

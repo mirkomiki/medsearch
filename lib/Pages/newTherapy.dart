@@ -1,22 +1,18 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/TimePickerWidget.dart';
 import 'package:medsearch/Pages/pages.dart';
-import 'package:medsearch/Pages/setReminders.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
 
 const List<String> dailyPillsItemList = <String>['1', '2', '3', '4', '5', '6'];
-class newTherapy extends StatefulWidget {
-  const newTherapy({super.key});
+class NewTherapy extends StatefulWidget {
+  const NewTherapy({super.key});
 
   @override
-  State<newTherapy> createState() => _newTherapyState();
+  State<NewTherapy> createState() => _NewTherapyState();
 }
 
-class _newTherapyState extends State<newTherapy> {
+class _NewTherapyState extends State<NewTherapy> {
   DateTime endDate = DateTime.now().add(const Duration(days: 1));
   DateTime startDate = DateTime.now();
   
@@ -38,7 +34,7 @@ class _newTherapyState extends State<newTherapy> {
   late int? pillsInBottle= int.tryParse(pillsInBottleController.text);
 
   void finishAddTherapy(){
-      therapies.add(Therapy(name, dosage, pillsADay, pillsInBottle, startDate, endDate, reminderList));
+      therapies.add(Therapy(name, dosage, pillsInBottle, startDate, endDate, reminderList));
       // ignore: avoid_print
       nameController = TextEditingController();
       pillsInBottleController = TextEditingController();
