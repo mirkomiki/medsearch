@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medsearch/Pages/fullTherapyView.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
@@ -26,6 +27,11 @@ class _HomeState extends State<Home> {
     },).toList();
   
     return filteredTherapies;
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
   
   @override
@@ -107,8 +113,10 @@ class _HomeState extends State<Home> {
           
           children: <Widget>[
             ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/full-therapy'); 
+              onPressed: () async{
+                await Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const FullTherapy()),);
+              setState(() {}); 
               }, 
               style: ButtonStyle(
                 backgroundColor:MaterialStateProperty.all<Color>(Colors.amber)), 
@@ -118,8 +126,9 @@ class _HomeState extends State<Home> {
             ),
             
             ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/reminders');
+              onPressed: () async{
+                await Navigator.pushNamed(context, '/reminders' );
+                setState(() {});
                 },
               icon: const Icon( 
               Icons.add_alert_rounded,

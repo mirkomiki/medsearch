@@ -246,6 +246,7 @@ class _EditTherapyState extends State<EditTherapy> {
     if(pillsADay! < reminders.length){
       reminders.removeRange(pillsADay!, reminders.length);
     }
+    
   }
 }
 

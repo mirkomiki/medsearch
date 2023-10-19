@@ -27,17 +27,21 @@ class _FullTherapyState extends State<FullTherapy> {
                 therapy: therapy, 
                 edit: () => 
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => EditTherapy(therapy: therapy,), // selectedTherapy is the therapy object to edit
-                    ),
-                  ).then((updatedTherapy) {
-                    if (updatedTherapy != null) {
-                      // Handle the updated therapy object (e.g., replace it in the list)
-                      setState(() {
-                        therapy = updatedTherapy;
-                      });
-                    }
-                  }),
+                      MaterialPageRoute(
+                        builder: (context) => EditTherapy(therapy: therapy), // selectedTherapy is the therapy object to edit
+                      ),
+                    ).then((updatedTherapy) {
+                      if (updatedTherapy != null) {
+                        // Find the index of the therapy in the list
+                        int index = therapies.indexOf(therapy);
+                        if (index != -1) {
+                          // Update the therapy object in the list with the updated one
+                          setState(() {
+                            therapies[index] = updatedTherapy;
+                          });
+                        }
+                      }
+                    }),
                 delete: () {
                 setState(() {
                   therapies.remove(therapy);
