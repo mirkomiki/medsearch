@@ -1,34 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server/gmail.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
-class BugReportForm extends StatelessWidget {
+class BugReportForm extends StatefulWidget {
+  const BugReportForm({super.key});
+
+  @override
+  _BugReportFormState createState() => _BugReportFormState();
+}
+
+class _BugReportFormState extends State<BugReportForm> {
   final _bugDescriptionController = TextEditingController();
-
-  BugReportForm({super.key});
-
-  _sendBugReportEmail(String bugDescription) async {
-    final smtpServer = gmail('YOUR_EMAIL@gmail.com', 'YOUR_PASSWORD');
-    
-    final message = Message()
-      ..from = Address('YOUR_EMAIL@gmail.com')
-      ..recipients.add('medsearchmirko@gmail.com')
-      ..subject = 'Bug Report'
-      ..text = bugDescription;
-    
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-    } on MailerException catch (e) {
-      print('Message not sent. Error: $e');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bug Report Form'),
+        title: const Text('Bug Report Form'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,11 +27,18 @@ class BugReportForm extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 final bugDescription = _bugDescriptionController.text;
-                _sendBugReportEmail(bugDescription);
-              },
-              child: Text('Submit Bug Report'),
+
+                final Email email = Email(
+                  body: bugDescription,
+                  subject: 'Bug Report',
+                  recipients: ['medsearchmirko@gmail.com'],
+                );
+
+                await FlutterEmailSender.send(email);
+                },
+              child: const Text('Submit Bug Report'),
             ),
           ],
         ),
