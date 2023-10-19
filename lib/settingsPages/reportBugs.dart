@@ -1,19 +1,53 @@
 import 'package:flutter/material.dart';
-class ReportBug extends StatefulWidget {
-  const ReportBug({super.key});
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 
-  @override
-  State<ReportBug> createState() => _ReportBugState();
-}
+class BugReportForm extends StatelessWidget {
+  final _bugDescriptionController = TextEditingController();
 
-class _ReportBugState extends State<ReportBug> {
+  BugReportForm({super.key});
+
+  _sendBugReportEmail(String bugDescription) async {
+    final smtpServer = gmail('YOUR_EMAIL@gmail.com', 'YOUR_PASSWORD');
+    
+    final message = Message()
+      ..from = Address('YOUR_EMAIL@gmail.com')
+      ..recipients.add('medsearchmirko@gmail.com')
+      ..subject = 'Bug Report'
+      ..text = bugDescription;
+    
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+    } on MailerException catch (e) {
+      print('Message not sent. Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: const Text('Report bug'),
-        backgroundColor: const Color.fromARGB(255, 0, 164, 164),
+        title: Text('Bug Report Form'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _bugDescriptionController,
+              decoration: InputDecoration(labelText: 'Bug Description'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                final bugDescription = _bugDescriptionController.text;
+                _sendBugReportEmail(bugDescription);
+              },
+              child: Text('Submit Bug Report'),
+            ),
+          ],
+        ),
       ),
     );
   }

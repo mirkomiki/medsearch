@@ -17,7 +17,7 @@ void main() => runApp(MaterialApp(
     '/full-therapy': (context) => const FullTherapy(),
     '/reminders': (context) => const Reminders(),
     '/user': (context) => const UserEdit(),
-    '/report-bug':(context) => const ReportBug(),
+    '/report-bug':(context) => const BugReportForm(),
     '/add-family-member':(context) => const AddFamilyMember(),
     '/edit-family-settings':(context) => const EditFamily(),
   }, 
