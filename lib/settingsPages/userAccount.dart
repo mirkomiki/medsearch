@@ -3,8 +3,10 @@ import "dart:async";
 import "package:animated_snack_bar/animated_snack_bar.dart";
 import "package:flutter/material.dart";
 import "package:flutter/scheduler.dart";
+import "package:image_picker/image_picker.dart";
 import "package:medsearch/Pages/pages.dart";
 import "package:medsearch/Pages/settings.dart";
+import "package:medsearch/TypesOfData/uploadPhotoDialog.dart";
 import "package:medsearch/globals.dart";
 
 class UserEdit extends StatefulWidget {
@@ -44,7 +46,7 @@ class _UserEditState extends State<UserEdit> {
     mobileSnackBarPosition: MobileSnackBarPosition.bottom,
     ).show(context);
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -97,6 +99,16 @@ class _UserEditState extends State<UserEdit> {
                         const Padding(padding: EdgeInsets.all(25)),
                         ElevatedButton(onPressed: () => {finishUserAccountEdit(), Navigator.of(context).pop()}, 
                         child: const Text('Save changes'),),
+                        localUser.avatar,
+                        
+                        
+                        ElevatedButton(
+                          onPressed: () => showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => UploadPhotoDialog()
+                          ),
+                          child: const Text('Upload photo'),
+                        ),
                       ],
                       
                     ),

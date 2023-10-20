@@ -16,7 +16,7 @@ class User{
   User({required this.username, required this.name, required this.surname, required this.age, }){
     id = userCount + 1;
     String firstLetterName = name.characters.elementAt(0);
-    String firstLetterSurname = name.characters.elementAt(0);
+    String firstLetterSurname = surname.characters.elementAt(0);
     avatar = CircleAvatar(child: Text('$firstLetterName$firstLetterSurname'),);
   }
 }
