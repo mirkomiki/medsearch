@@ -27,6 +27,7 @@ class _UploadPhotoDialogState extends State<UploadPhotoDialog> {
       setState(() => this.image = imageTemporary);
     
     } on PlatformException catch (e) {
+      // ignore: avoid_print
       print('Failed to pick image $e');
   }
   }
@@ -39,7 +40,7 @@ class _UploadPhotoDialogState extends State<UploadPhotoDialog> {
         child: Row(
           children: [
             image != null  ? CircleAvatar(radius: 40, backgroundImage: Image.file(image!).image,) : CircleAvatar(radius: 40,child: localUser.avatar,),
-            Padding(padding: EdgeInsets.all(15)),
+            
             Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -47,12 +48,25 @@ class _UploadPhotoDialogState extends State<UploadPhotoDialog> {
                 ElevatedButton.icon(onPressed: () => {pickImage(ImageSource.gallery)},icon: const Icon(Icons.photo_library_outlined), label: const Text('From Gallery')),
                 ElevatedButton.icon(onPressed: () => {pickImage(ImageSource.camera)},icon: const Icon(Icons.add_a_photo_outlined) ,label: const Text('From Camera')),
                 const SizedBox(height: 15),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Close'),
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        localUser.avatar = CircleAvatar(backgroundImage: Image.file(image!).image);
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Close and save'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Discard', style: TextStyle(color: Colors.red)),
+                      ),
+                  ],
                 ),
+                
               ],
             ),
           ],

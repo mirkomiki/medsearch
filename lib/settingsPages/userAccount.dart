@@ -1,11 +1,5 @@
-import "dart:async";
-
 import "package:animated_snack_bar/animated_snack_bar.dart";
 import "package:flutter/material.dart";
-import "package:flutter/scheduler.dart";
-import "package:image_picker/image_picker.dart";
-import "package:medsearch/Pages/pages.dart";
-import "package:medsearch/Pages/settings.dart";
 import "package:medsearch/TypesOfData/uploadPhotoDialog.dart";
 import "package:medsearch/globals.dart";
 
@@ -22,18 +16,23 @@ class _UserEditState extends State<UserEdit> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController ageController = TextEditingController();
-  
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = localUser.name;
+    surnameController.text = localUser.surname;
+    usernameController.text = localUser.username;
+    ageController.text = localUser.age.toString();
+    
+  }
   void finishUserAccountEdit(){
     
-    localUser.age = int.tryParse(nameController.text.toString());
+    localUser.age = int.tryParse(ageController.text.toString());
     localUser.name = nameController.text.toString();
     localUser.surname = surnameController.text.toString();
     localUser.username = usernameController.text.toString();
 
-    nameController = TextEditingController();
-    surnameController = TextEditingController();
-    usernameController = TextEditingController();
-    ageController = TextEditingController();
+    
     /* selectedPageIndex = 2;
     Navigator.pushReplacement(
       context,
@@ -76,13 +75,13 @@ class _UserEditState extends State<UserEdit> {
                           children: <Widget> [
                             Flexible(
                               fit: FlexFit.loose,
-                              child: TextFormField(style: const TextStyle(color: Colors.white),focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Name...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26)),controller: surnameController,),
+                              child: TextFormField(style: const TextStyle(color: Colors.white),focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Name...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26)),controller: nameController,),
                               
                             ),
                             const Padding(padding: EdgeInsets.all(10)),
                             Flexible(
                               fit: FlexFit.loose,
-                              child: TextFormField(style: const TextStyle(color: Colors.white),  focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Surname...   ', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26),),controller: ageController,),
+                              child: TextFormField(style: const TextStyle(color: Colors.white),  focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Surname...   ', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26),),controller: surnameController,),
                             ),
                             const Padding(padding: EdgeInsets.all(15)),
                             
@@ -104,9 +103,10 @@ class _UserEditState extends State<UserEdit> {
                         
                         ElevatedButton(
                           onPressed: () => showDialog<String>(
-                            context: context,
-                            builder: (BuildContext context) => UploadPhotoDialog()
-                          ),
+                            context: context, 
+                            builder: (BuildContext context) => const UploadPhotoDialog(),
+
+                          ).then((value) => setState(() => {})),
                           child: const Text('Upload photo'),
                         ),
                       ],
