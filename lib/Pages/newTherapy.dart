@@ -41,6 +41,7 @@ class _NewTherapyState extends State<NewTherapy> {
       dosageController = TextEditingController();
       selectedPageIndex = 0;
       reminderList = [TimeOfDay.now()];
+      selectedPageIndex = 0;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Pages()),

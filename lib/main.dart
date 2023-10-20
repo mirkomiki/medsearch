@@ -11,15 +11,15 @@ import 'SettingsPages/familyView.dart';
 import 'SettingsPages/reportBugs.dart';
 
 void main() => runApp(MaterialApp(
-  routes: {
-    '/': (context) => const Loading(),
-    '/pages': (context) => const Pages(),
-    '/full-therapy': (context) => const FullTherapy(),
-    '/reminders': (context) => const Reminders(),
-    '/user': (context) => const UserEdit(),
-    '/report-bug':(context) => const BugReportForm(),
-    '/add-family-member':(context) => const AddFamilyMember(),
-    '/edit-family-settings':(context) => const EditFamily(),
-  }, 
-)
+    routes: {
+      '/': (context) => const Loading(),
+      '/pages': (context) => const Pages(),
+      '/full-therapy': (context) => const FullTherapy(),
+      '/reminders': (context) => const Reminders(),
+      '/user': (context) => const UserEdit(),
+      '/report-bug':(context) => const BugReportForm(),
+      '/add-family-member':(context) => const AddFamilyMember(),
+      '/edit-family-settings':(context) => const EditFamily(),
+    }, 
+  )
 );

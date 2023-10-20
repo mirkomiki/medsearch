@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
+import 'package:medsearch/TypesOfData/user.dart';
 
 // FILE WITH GLOBAL VARIABLES AND FUNCTIONS
 
@@ -27,5 +28,7 @@ List<Therapy> therapies = [
   void generateDailyReminders () {
 
   }
-
+  int userCount = 0;
+  int familyCount = 0;
+  User localUser = User(username: 'Hrcak', name: 'Biti', surname: 'Ne biti', age: 4);
   

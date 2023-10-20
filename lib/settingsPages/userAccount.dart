@@ -1,4 +1,11 @@
+import "dart:async";
+
+import "package:animated_snack_bar/animated_snack_bar.dart";
 import "package:flutter/material.dart";
+import "package:flutter/scheduler.dart";
+import "package:medsearch/Pages/pages.dart";
+import "package:medsearch/Pages/settings.dart";
+import "package:medsearch/globals.dart";
 
 class UserEdit extends StatefulWidget {
   const UserEdit({super.key});
@@ -8,14 +15,95 @@ class UserEdit extends StatefulWidget {
 }
 
 class _UserEditState extends State<UserEdit> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController surnameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  
+  void finishUserAccountEdit(){
+    
+    localUser.age = int.tryParse(nameController.text.toString());
+    localUser.name = nameController.text.toString();
+    localUser.surname = surnameController.text.toString();
+    localUser.username = usernameController.text.toString();
+
+    nameController = TextEditingController();
+    surnameController = TextEditingController();
+    usernameController = TextEditingController();
+    ageController = TextEditingController();
+    /* selectedPageIndex = 2;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const Pages()),
+    ); */
+    AnimatedSnackBar.material(
+    'Changes saved',
+    //Later fix dona il
+    type: AnimatedSnackBarType.success,
+    mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+    ).show(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        title: const Text('User account'),
-        backgroundColor: const Color.fromARGB(255, 0, 164, 164),
-      ),
-    );
+    return GestureDetector(
+        onTap: () {
+         FocusScope.of(context).requestFocus(FocusNode());
+      },
+        child: Scaffold(
+              backgroundColor: Colors.grey[900],
+              appBar: AppBar(
+                title: const Text('User Account'),
+                backgroundColor: const Color.fromARGB(255, 0, 164, 164),
+              ),
+              body: Form(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: SingleChildScrollView(
+                    child: 
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        const Padding(padding: EdgeInsets.all(10)),
+                        TextFormField(style: const TextStyle(color: Colors.white),focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Username...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26)),controller: usernameController,),
+                        const Padding(padding: EdgeInsets.all(15)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          
+                          children: <Widget> [
+                            Flexible(
+                              fit: FlexFit.loose,
+                              child: TextFormField(style: const TextStyle(color: Colors.white),focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Name...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26)),controller: surnameController,),
+                              
+                            ),
+                            const Padding(padding: EdgeInsets.all(10)),
+                            Flexible(
+                              fit: FlexFit.loose,
+                              child: TextFormField(style: const TextStyle(color: Colors.white),  focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Surname...   ', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26),),controller: ageController,),
+                            ),
+                            const Padding(padding: EdgeInsets.all(15)),
+                            
+                          ],
+                        ),
+                        const Padding(padding: EdgeInsets.all(15)),
+                        Row(
+                          children: [
+                            Flexible(
+                              child: TextFormField(style: const TextStyle(color: Colors.white),  focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Age...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26),),controller: ageController,keyboardType: const TextInputType.numberWithOptions(decimal: false),),
+                            ),
+                          ],
+                        ),  
+                        const Padding(padding: EdgeInsets.all(25)),
+                        ElevatedButton(onPressed: () => {finishUserAccountEdit(), Navigator.of(context).pop()}, 
+                        child: const Text('Save changes'),),
+                      ],
+                      
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        );
   }
 }
