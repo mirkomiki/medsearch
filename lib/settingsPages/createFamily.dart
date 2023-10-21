@@ -36,7 +36,6 @@ class _CreateFamilyState extends State<CreateFamily> {
     } else {
       localFamily.users= [];
     }
-    print(localFamily.users.length);
     AnimatedSnackBar.material(
       'Created family',
       type: AnimatedSnackBarType.success,
@@ -45,7 +44,6 @@ class _CreateFamilyState extends State<CreateFamily> {
   }
   @override
   Widget build(BuildContext context) {
-    bool sValue = true;
     return GestureDetector(
         onTap: () {
          FocusScope.of(context).requestFocus(FocusNode());
