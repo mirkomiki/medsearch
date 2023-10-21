@@ -29,9 +29,10 @@ List<Therapy> therapies = [
   void generateDailyReminders () {
 
   }
+  Family localFamily = Family(familyName: '', users: []);
   int userCount = 0;
   int familyCount = 0;
-  User localUser = User(username: 'Hrcak', name: 'Biti', surname: 'Ne biti', age: 4);
-  User localUser2 = User(username: 'Hrcak2', name: '1iti', surname: 'De1 biti', age: 5);
-  User localUser3 = User(username: 'Hrcak3', name: '2iti', surname: 'De2 biti', age: 6);
-  Family localFamily = Family(familyName: 'Svinjcekovi', numberOfMembers: 3, users: [localUser, localUser2, localUser3]);
+  User localUser = User(username: 'Hrcak', name: 'Biti', surname: 'Ne biti', age: 4, therapies: []);
+  User localUser2 = User(username: 'Hrcak2', name: '1iti', surname: 'De1 biti', age: 5, therapies: []);
+  User localUser3 = User(username: 'Hrcak3', name: '2iti', surname: 'De2 biti', age: 6, therapies: []);
+  //Family localFamily = Family(familyName: 'Svinjcekovi', users: [localUser, localUser2, localUser3]);

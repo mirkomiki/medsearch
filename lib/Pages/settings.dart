@@ -49,6 +49,17 @@ class _SettingsState extends State<Settings> {
               Row(mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(onPressed: () {
+                  Navigator.pushNamed(context, '/create-family');
+                  }, 
+                  child: const Text('Create Family ', style: TextStyle(fontSize: 20),),
+                  )
+              ],
+              ),
+              
+              const SizedBox(height: 25,),
+              Row(mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TextButton(onPressed: () {
                   Navigator.pushNamed(context, '/edit-family-settings');
                   }, 
                   child: const Text('Edit Family Settings', style: TextStyle(fontSize: 20),),

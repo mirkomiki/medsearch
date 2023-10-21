@@ -11,12 +11,16 @@ class User{
   int? age;
   String username;
   late CircleAvatar avatar;
-  List<Therapy> therapies = [];
+  List<Therapy> therapies;
 
-  User({required this.username, required this.name, required this.surname, required this.age, }){
+  User({required this.username, required this.name, required this.surname, required this.age, required this.therapies}){
     id = userCount + 1;
     String firstLetterName = name.characters.elementAt(0);
     String firstLetterSurname = surname.characters.elementAt(0);
     avatar = CircleAvatar(radius: 80,child: Text('$firstLetterName$firstLetterSurname'),);
+    therapies = [];
+  }
+  set setTherapies(List<Therapy> t) {
+    therapies = t;
   }
 }

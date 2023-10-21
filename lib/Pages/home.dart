@@ -57,7 +57,22 @@ class _HomeState extends State<Home> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-            CircleAvatar(radius: 36, child: localUser.avatar),
+            /*GestureDetector(
+            onTap: () {
+             //do what you want here
+            },
+            child:  CircleAvatar(
+               radius: 55.0,
+                backgroundImage: ExactAssetImage('assets/cat.jpg'),
+              ), 
+            ),*/
+            GestureDetector(
+              onTap: () {
+                
+              },
+              child: const CircleAvatar(radius: 36,foregroundColor: Colors.black,backgroundColor: Colors.white ,child: Icon(Icons.group),)),
+            CircleAvatar(radius: 36, child: localUser.avatar,),
+            
             const CircleAvatar(radius: 36, backgroundImage: AssetImage('assets/scary_man.jpg', )),
             const CircleAvatar(radius: 36, backgroundImage: AssetImage('assets/scary_man.jpg', )),
             const CircleAvatar(radius: 36, backgroundImage: AssetImage('assets/scary_man.jpg', )),

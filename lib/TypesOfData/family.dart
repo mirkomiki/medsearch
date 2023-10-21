@@ -9,7 +9,7 @@ class Family{
   List<User> users = [];
   
   
-  Family({required this.familyName, required this.numberOfMembers, required this.users}){
+  Family({required this.familyName, required this.users}){
     id = familyCount + 1;
   }
 }

@@ -4,6 +4,7 @@ import 'package:medsearch/Pages/fullTherapyView.dart';
 import 'package:medsearch/Pages/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/pages.dart';
+import 'package:medsearch/SettingsPages/createFamily.dart';
 import 'package:medsearch/SettingsPages/userAccount.dart';
 import 'Pages/reminders.dart';
 import 'SettingsPages/addFamilyMember.dart';
@@ -20,6 +21,7 @@ void main() => runApp(MaterialApp(
       '/report-bug':(context) => const BugReportForm(),
       '/add-family-member':(context) => const AddFamilyMember(),
       '/edit-family-settings':(context) => const EditFamily(),
+      '/create-family':(context) => const CreateFamily(),
     }, 
   )
 );
