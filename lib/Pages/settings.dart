@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medsearch/globals.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -20,10 +21,10 @@ class _SettingsState extends State<Settings> {
           child: Column(
       
             children: <Widget>[
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Expanded(
+                  const Expanded(
                     flex: 3,
                     child: 
                       Text('Settings', 
@@ -31,14 +32,14 @@ class _SettingsState extends State<Settings> {
                       ),
                     
                   ),
-                  Expanded(flex: 1,child: CircleAvatar(radius: 28,),)
+                  Expanded(flex: 1, child: CircleAvatar(radius: 30,child: localUser.avatar,),),
                 ],
               ),
               const SizedBox(height: 25,),
               Row(mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(onPressed: () {
-                  Navigator.pushNamed(context, '/user');
+                  Navigator.pushNamed(context, '/user').then((value) => setState(() => {}));
                   }, 
                   child: const Text('Edit Account', style: TextStyle(fontSize: 20),),
                   )

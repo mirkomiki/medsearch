@@ -39,7 +39,7 @@ class _UploadPhotoDialogState extends State<UploadPhotoDialog> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            image != null  ? CircleAvatar(radius: 40, backgroundImage: Image.file(image!).image,) : CircleAvatar(radius: 40,child: localUser.avatar,),
+            image != null  ? CircleAvatar(radius: 40, backgroundImage: Image.file(image!).image,) : CircleAvatar(radius: 40, child: localUser.avatar,),
             
             Column(
               mainAxisSize: MainAxisSize.min,
@@ -52,7 +52,7 @@ class _UploadPhotoDialogState extends State<UploadPhotoDialog> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        localUser.avatar = CircleAvatar(backgroundImage: Image.file(image!).image);
+                        localUser.avatar = CircleAvatar(backgroundImage: Image.file(image!).image, radius: 60   ,);
                         Navigator.pop(context);
                       },
                       child: const Text('Close and save'),

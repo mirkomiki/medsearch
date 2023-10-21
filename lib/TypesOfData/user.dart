@@ -17,6 +17,6 @@ class User{
     id = userCount + 1;
     String firstLetterName = name.characters.elementAt(0);
     String firstLetterSurname = surname.characters.elementAt(0);
-    avatar = CircleAvatar(child: Text('$firstLetterName$firstLetterSurname'),);
+    avatar = CircleAvatar(radius: 80,child: Text('$firstLetterName$firstLetterSurname'),);
   }
 }
