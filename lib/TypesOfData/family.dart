@@ -12,5 +12,4 @@ class Family{
   Family({required this.familyName, required this.numberOfMembers, required this.users}){
     id = familyCount + 1;
   }
-  
 }

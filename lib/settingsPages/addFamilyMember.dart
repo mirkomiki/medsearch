@@ -6,8 +6,15 @@ class AddFamilyMember extends StatefulWidget {
   @override
   State<AddFamilyMember> createState() => _AddFamilyMemberState();
 }
+void addViaQRCode(){
+}
+void addManualy(){
 
+}
+void shareLink(){}
 class _AddFamilyMemberState extends State<AddFamilyMember> {
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +23,35 @@ class _AddFamilyMemberState extends State<AddFamilyMember> {
         title: const Text('Invite family members'), //QR INVITE DO APLIKACIJE, "KOD" OBITELJI 
         backgroundColor: const Color.fromARGB(255, 0, 164, 164),
       ),
+      body:
+      Column(children: [
+        const SizedBox(height: 40,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(onPressed: () {addViaQRCode;} , label: const Text('Add via QR code'), icon: const Icon(Icons.qr_code),),
+            ],
+          ),
+          const SizedBox(height: 40,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(onPressed: () {addManualy;} , label: const Text('Add manualy'), icon: const Icon(Icons.person_add),),
+            ],
+          ),
+          const SizedBox(height: 40,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(onPressed: () {shareLink;}, label: const Text('Send link to join family'), icon: const Icon(Icons.send_outlined)),
+            ],
+          ),
+          
+      ],) 
+          
+        
+        
+      
     );
   }
 }
