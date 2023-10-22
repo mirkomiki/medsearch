@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
           
         
         Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
                 child: SizedBox(
@@ -74,11 +74,11 @@ class _HomeState extends State<Home> {
                     itemCount: localFamily.users.length+1,
                     itemBuilder: (BuildContext context, int index) {  
                       if(index == 0){
-                        return const Column(
+                        return Column(
                             children: [
-                              CircleAvatar(radius: 34, child: Icon(Icons.group),),
-                              SizedBox(height: 5,),
-                              Text('Everyone', style: TextStyle(color: Colors.white, fontSize: 14),)
+                              CircleAvatar(radius: 34, backgroundColor: Color.fromARGB(176, 255, 255, 255), child: Icon(Icons.group, color: Colors.grey[900],),),
+                              const SizedBox(height: 5,),
+                              const Text('Everyone', style: TextStyle(color: Colors.white, fontSize: 14),)
                             ],
                         );
                       }
