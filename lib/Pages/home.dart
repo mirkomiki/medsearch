@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/fullTherapyView.dart';
+import 'package:medsearch/Themes/avatars.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
@@ -30,7 +31,6 @@ class _HomeState extends State<Home> {
   }
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
   
@@ -48,44 +48,54 @@ class _HomeState extends State<Home> {
     
     SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget> [
         const Divider(
           height: 20,
         ),
-        SingleChildScrollView(scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-            /*GestureDetector(
-            onTap: () {
-             //do what you want here
-            },
-            child:  CircleAvatar(
-               radius: 55.0,
-                backgroundImage: ExactAssetImage('assets/cat.jpg'),
-              ), 
-            ),*/
-            GestureDetector(
-              onTap: () {
-                
-              },
-              child: const CircleAvatar(radius: 36,foregroundColor: Colors.black,backgroundColor: Colors.white ,child: Icon(Icons.group),)),
-            CircleAvatar(radius: 36, child: localUser.avatar,),
+        
+        Row(
+          children: [
             
-            const CircleAvatar(radius: 36, backgroundImage: AssetImage('assets/scary_man.jpg', )),
-            const CircleAvatar(radius: 36, backgroundImage: AssetImage('assets/scary_man.jpg', )),
-            const CircleAvatar(radius: 36, backgroundImage: AssetImage('assets/scary_man.jpg', )),
-            const CircleAvatar(radius: 36, backgroundImage: AssetImage('assets/baby.jpg', )),
-            const CircleAvatar(radius: 36, backgroundImage: AssetImage('assets/trump_avatar.jpg', )),
-            const CircleAvatar(radius: 36, backgroundImage: AssetImage('assets/scary_man.jpg', )),
-            ],
+          
+        
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.14,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(width: 10,);
+                    },
+                    shrinkWrap: true,
+                    itemCount: localFamily.users.length+1,
+                    itemBuilder: (BuildContext context, int index) {  
+                      if(index == 0){
+                        return const Column(
+                            children: [
+                              CircleAvatar(radius: 34, child: Icon(Icons.group),),
+                              SizedBox(height: 5,),
+                              Text('Everyone', style: TextStyle(color: Colors.white, fontSize: 14),)
+                            ],
+                        );
+                      }
+                      return HomeAvatarCard(user: localFamily.users[index-1]);
+                      
+                    },
+                  ),
+                ),
+              
+            ),
           ),
+        
+          ],
         ),
-        Divider(
-          height: 25,
-          color: Colors.grey[900],
-        ),
+        
+
+        
         SingleChildScrollView(
           child: SizedBox(
             height: 420,
