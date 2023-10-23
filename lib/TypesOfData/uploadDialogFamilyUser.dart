@@ -8,8 +8,8 @@ import 'package:medsearch/globals.dart';
 
 // ignore: non_constant_identifier_names, must_be_immutable
 class UploadPhotoFamilyDialog extends StatefulWidget {
-  
-  const UploadPhotoFamilyDialog({super.key, required});
+  User user;
+  UploadPhotoFamilyDialog({super.key, required this.user});
 
   @override
   State<UploadPhotoFamilyDialog> createState() => _UploadPhotoFamilyDialogState();
@@ -39,7 +39,7 @@ class _UploadPhotoFamilyDialogState extends State<UploadPhotoFamilyDialog> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            image != null  ? CircleAvatar(radius: 40, backgroundImage: Image.file(image!).image,) : CircleAvatar(radius: 40, child: localUser.avatar,),
+            image != null  ? CircleAvatar(radius: 40, backgroundImage: Image.file(image!).image,) : CircleAvatar(radius: 40, child: widget.user.avatar,),
             
             Column(
               mainAxisSize: MainAxisSize.min,
@@ -52,7 +52,7 @@ class _UploadPhotoFamilyDialogState extends State<UploadPhotoFamilyDialog> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        localUser.avatar = CircleAvatar(backgroundImage: Image.file(image!).image, radius: 60   ,);
+                        widget.user.avatar = CircleAvatar(backgroundImage: Image.file(image!).image, radius: 60   ,);
                         Navigator.pop(context);
                       },
                       child: const Text('Close and save'),

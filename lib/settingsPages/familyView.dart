@@ -1,6 +1,7 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:medsearch/SettingsPages/addFamilyMember.dart';
+import 'package:medsearch/SettingsPages/editFamilyMembers.dart';
 import 'package:medsearch/TypesOfData/family.dart';
 import 'package:medsearch/TypesOfData/userCard.dart';
 import 'package:medsearch/globals.dart';
@@ -14,20 +15,19 @@ class EditFamily extends StatefulWidget {
 
 class _EditFamilyState extends State<EditFamily> {
   TextEditingController nameController = TextEditingController();
-  bool addMainUser = true;
   
   @override
   void initState() {
     super.initState();
     nameController.text = localFamily.familyName;
+    
   }
   
   void finishFamilyEdit() {
-    if(addMainUser == true){
-      localFamily.users.add(localUser);
-    } else {
-      localFamily.users = [];
-    }
+    Navigator.pop(context);
+    setState(() {
+      
+    });
     AnimatedSnackBar.material(
       'Changes saved',
       type: AnimatedSnackBarType.success,
@@ -67,11 +67,22 @@ class _EditFamilyState extends State<EditFamily> {
             itemBuilder: (context, index) {
               final user = localFamily.users[index];
               return UserCard(
-                edit: () {
-                  setState(() {
-                    
-                  });
-                },
+                edit: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => EditFamilyMember(user: user,), // selectedTherapy is the therapy object to edit
+                    ),
+                  ).then((updatedUser) {
+                    if (updatedUser != null) {
+                      // Find the index of the therapy in the list
+                      int index = localFamily.users.indexOf(user);
+                      if (index != -1) {
+                        // Update the therapy object in the list with the updated one
+                        setState(() {
+                          localFamily.users[index] = updatedUser;
+                        });
+                      }
+                    }
+                  }).then((value) => setState(() => {})),
                 delete: () => 
                   setState(() {
                     localFamily.users.remove(user);
@@ -83,7 +94,7 @@ class _EditFamilyState extends State<EditFamily> {
             ),
           ),
         ),
-                    ElevatedButton(onPressed: () => {finishFamilyEdit(), Navigator.of(context).pop()}, 
+                    ElevatedButton(onPressed: () => {finishFamilyEdit()}, 
                     child: const Text('Save Changes'),),
                   ],
                 ),
@@ -91,11 +102,13 @@ class _EditFamilyState extends State<EditFamily> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.grey,
               onPressed: () async{
                 await Navigator.push(context,
               MaterialPageRoute(builder: (context) => const AddFamilyMember()),);
               setState(() {});
-            }),
+            },
+            child: const Icon(Icons.add, size: 30,)),
         ),
     );
   }

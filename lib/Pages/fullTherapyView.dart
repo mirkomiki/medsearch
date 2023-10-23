@@ -41,7 +41,7 @@ class _FullTherapyState extends State<FullTherapy> {
                           });
                         }
                       }
-                    }),
+                    }).then((value) => setState(() => {})),
                 delete: () {
                 setState(() {
                   therapies.remove(therapy);

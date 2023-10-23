@@ -1,48 +1,50 @@
-import "package:animated_snack_bar/animated_snack_bar.dart";
-import "package:flutter/material.dart";
-import "package:medsearch/TypesOfData/uploadPhotoDialog.dart";
-import "package:medsearch/TypesOfData/user.dart";
-import "package:medsearch/globals.dart";
+import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:medsearch/Pages/TimePickerWidget.dart';
+import 'package:medsearch/Pages/newTherapy.dart';
+import 'package:medsearch/TypesOfData/therapy.dart';
+import 'package:medsearch/TypesOfData/uploadDialogFamilyUser.dart';
+import 'package:medsearch/TypesOfData/uploadPhotoDialog.dart';
+import 'package:medsearch/TypesOfData/user.dart';
 
-class NewFamilyMemberManualy extends StatefulWidget {
-  const NewFamilyMemberManualy({super.key});
-
+// ignore: must_be_immutable
+class EditFamilyMember extends StatefulWidget {
+  User user;
+  EditFamilyMember({super.key, required this.user});
   @override
-  State<NewFamilyMemberManualy> createState() => _NewFamilyMemberManualyState();
+  State<EditFamilyMember> createState() => _EditFamilyMemberState(
+  );
 }
 
-class _NewFamilyMemberManualyState extends State<NewFamilyMemberManualy> {
+class _EditFamilyMemberState extends State<EditFamilyMember> {
   TextEditingController nameController = TextEditingController();
   TextEditingController surnameController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
-  late String name = nameController.text.toString();
-  late String username = usernameController.text.toString();
-  late String surname = surnameController.text.toString();
-  late int age = int.tryParse(ageController.text.toString())!;
-
-  void finishMemberAddManually(){
+ 
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = widget.user.name.toString();
+    surnameController.text = widget.user.surname.toString();
+    usernameController.text = widget.user.username.toString();
+    ageController.text = widget.user.age.toString();
+  }
+  void finishUserAccountEdit(){
+    widget.user.name = nameController.text;
+    widget.user.surname = surnameController.text;
+    widget.user.username = usernameController.text;
+    widget.user.age = int.tryParse(ageController.text.toString());
     
-    // ignore: unnecessary_new
-    localFamily.users.add(User(
-      username: usernameController.text,
-      name: nameController.text,
-      surname: surnameController.text,
-      age: int.tryParse(ageController.text) ?? 0,
-      therapies: [],
-    ));
-    nameController = TextEditingController();
-    surnameController = TextEditingController();
-    usernameController = TextEditingController();
-    ageController = TextEditingController();
-
+    Navigator.pop(context);
+    setState(() {});
     AnimatedSnackBar.material(
-    'User Created',
+    'Changes saved',
+    //Later fix dona il
     type: AnimatedSnackBarType.success,
     mobileSnackBarPosition: MobileSnackBarPosition.bottom,
     ).show(context);
   }
-  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -93,20 +95,17 @@ class _NewFamilyMemberManualyState extends State<NewFamilyMemberManualy> {
                           ],
                         ),  
                         const Padding(padding: EdgeInsets.all(25)),
+                        ElevatedButton(onPressed: () => {finishUserAccountEdit(),}, 
+                        child: const Text('Save changes'),),
+                        
                         
                         ElevatedButton(
                           onPressed: () => showDialog<String>(
                             context: context, 
-                            builder: (BuildContext context) => const UploadPhotoDialog(),
-
+                            builder: (BuildContext context) => UploadPhotoFamilyDialog(user: widget.user),
                           ).then((value) => setState(() => {})),
                           child: const Text('Upload photo'),
                         ),
-                        
-                        generateTempAvatar(),
-                        ElevatedButton(onPressed: () => {finishMemberAddManually(), Navigator.of(context).pop()}, 
-                        child: const Text('Save changes'),),
-                        
                       ],
                       
                     ),
@@ -116,13 +115,6 @@ class _NewFamilyMemberManualyState extends State<NewFamilyMemberManualy> {
             ),
         );
   }
-CircleAvatar generateTempAvatar() {
-  
-    String fltr = '  Profile Picture \n  will';
-    String sltr = 'include initals,\n  add custom picture\n     later in Settings';
-    return  CircleAvatar(radius: 80,child: Text('$fltr $sltr', style: const TextStyle(fontSize: 15, ),),);
-  }
-  
 }
 
-
+//CREDIT TO CHATGPT == GRESKA JE BIO MOJ UPIS NA RACUNARSTVO

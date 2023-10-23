@@ -225,7 +225,8 @@ class _EditTherapyState extends State<EditTherapy> {
                       widget.therapy.timesADay = pillsADay;
                       
                       // Navigate back to the previous page with the updated therapy object
-                      
+                      Navigator.pop(context);
+                      setState(() {});
                     },
                     child: const Text('Save Changes'),
                   ),
