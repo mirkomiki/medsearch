@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/fullTherapyView.dart';
+import 'package:medsearch/Pages/pages.dart';
 import 'package:medsearch/TypesOfData/Themes/avatars.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
@@ -137,10 +138,65 @@ class _HomeState extends State<Home> {
           child: SizedBox(
             height: 420,
             child: ListView.builder(
-            itemCount: todayReminders.length,
+            itemCount: todayReminders.length+1,
             itemBuilder: (context, index) {
-              final therapy = todayReminders[index];
-              return DailyTherapyCard(
+              
+              if(index == 0){
+                if(todayReminders.isEmpty){
+                  return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35),
+                  ),
+                  shadowColor: Colors.black,
+                  surfaceTintColor: Colors.amber,
+                  color: const Color.fromARGB(255, 201, 206, 213),
+                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                  child:
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Text('No reminders soon\nCreate new therapy if needed'),
+                          const SizedBox(width: 10,),
+                          ElevatedButton.icon(onPressed: () {
+                            selectedPageIndex = 1;
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => const Pages()),
+                            );}, icon: const Icon(Icons.add), label: const Text('ADD', style: TextStyle(fontSize: 12),),),
+                        ],
+                      ),
+                    ),);
+                } else {
+                  return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(35),
+                  ),
+                  shadowColor: Colors.black,
+                  surfaceTintColor: Colors.amber,
+                  color: const Color.fromARGB(255, 201, 206, 213),
+                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                  child:
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Text('Create new therapy if needed'),
+                          const SizedBox(width: 10,),
+                          ElevatedButton.icon(onPressed: () {selectedPageIndex = 1;
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const Pages()),
+                          );}, icon: const Icon(Icons.add), label: const Text('ADD', style: TextStyle(fontSize: 12),),),
+                        ],
+                      ),
+                    ),);
+                }
+              } else {
+                final therapy = todayReminders[index-1];
+                return DailyTherapyCard(
                 therapy: therapy,
                 delete: () => 
                 setState(() {
@@ -148,6 +204,8 @@ class _HomeState extends State<Home> {
                 therapies.remove(therapy);
                 }),
               );
+              }
+              
               },
             ),
           ),

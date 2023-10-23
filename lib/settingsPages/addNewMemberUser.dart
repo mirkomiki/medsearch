@@ -119,8 +119,8 @@ class _NewFamilyMemberManualyState extends State<NewFamilyMemberManualy> {
 CircleAvatar generateTempAvatar() {
   
     String fltr = '  Profile Picture \n  will';
-    String sltr = 'include initals,\n  add custom picture\n  later in Settings';
-    return  CircleAvatar(radius: 80,child: Text('$fltr $sltr', style: TextStyle(fontSize: 15, ),),);
+    String sltr = 'include initals,\n  add custom picture\n     later in Settings';
+    return  CircleAvatar(radius: 80,child: Text('$fltr $sltr', style: const TextStyle(fontSize: 15, ),),);
   }
   
 }
