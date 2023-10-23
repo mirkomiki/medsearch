@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/fullTherapyView.dart';
 import 'package:medsearch/Themes/avatars.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
+import 'package:medsearch/TypesOfData/user.dart';
 import 'package:medsearch/globals.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,11 +17,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   
   
-  List<Therapy> filterTherapiesForToday() {
+  List<Therapy> filterTherapiesForToday(List<Therapy> ctherapies) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     
-    final filteredTherapies = therapies.where((therapy) {
+
+
+    final filteredTherapies = ctherapies.where((therapy) {
       return therapy.firstDay.day <= today.day
       && therapy.firstDay.month <= today.month
       && therapy.firstDay.year <= today.year
@@ -26,17 +31,40 @@ class _HomeState extends State<Home> {
       && therapy.lastDay.month >= today.month
       && therapy.lastDay.day >= today.day;
     },).toList();
-  
     return filteredTherapies;
+  }
+
+  late List<Therapy> todayReminders = [];
+  
+  List<Therapy> familyTherapy = [];
+  void updateTodayReminders(int sIndex){
+    familyTherapy = [];
+    if(localFamily.users.isEmpty){
+      familyTherapy = localUser.therapies;
+    } else {
+      for (User user in localFamily.users) {
+        familyTherapy.addAll(user.therapies);
+      }
+    }
+    if(sIndex == 0){
+      setState(() {
+        todayReminders = familyTherapy;
+      });
+    } else{
+      setState(() {
+        todayReminders = localFamily.users[sIndex].therapies;
+      }); 
+    }
   }
   @override
   void initState() {
     super.initState();
+    updateTodayReminders(0);
+    
   }
   
   @override
   Widget build(BuildContext context) {
-    final todayReminders = filterTherapiesForToday(); 
     return Scaffold(
     backgroundColor: Colors.grey[900],
     appBar: AppBar(
@@ -45,19 +73,14 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.grey[900],
     ),
     body: 
-    
     SingleChildScrollView(
       child: Column(
         children: <Widget> [
         const Divider(
           height: 20,
         ),
-        
         Row(
           children: [
-            
-          
-        
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: SingleChildScrollView(
@@ -74,27 +97,41 @@ class _HomeState extends State<Home> {
                     itemCount: localFamily.users.length+1,
                     itemBuilder: (BuildContext context, int index) {  
                       if(index == 0){
-                        return Column(
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              updateTodayReminders(0);
+                              
+                            });
+                            
+                          },
+                          radius: 35,
+                          child: Column(
                             children: [
-                              CircleAvatar(radius: 34, backgroundColor: Color.fromARGB(176, 255, 255, 255), child: Icon(Icons.group, color: Colors.grey[900],),),
+                              CircleAvatar(radius: 34, backgroundColor: const Color.fromARGB(176, 255, 255, 255), child: Icon(Icons.group, color: Colors.grey[900],),),
                               const SizedBox(height: 5,),
                               const Text('Everyone', style: TextStyle(color: Colors.white, fontSize: 14),)
                             ],
+                          ),
                         );
                       }
-                      return HomeAvatarCard(user: localFamily.users[index-1]);
-                      
+                      return InkWell(
+                      onTap: () {
+                        setState(() {
+                          todayReminders = filterTherapiesForToday(localFamily.users[index-1].therapies);
+                        });
+                        
+                      },
+                      radius: 35,
+                      child: HomeAvatarCard(user: localFamily.users[index-1]));
                     },
                   ),
                 ),
-              
             ),
           ),
-        
           ],
         ),
         
-
         
         SingleChildScrollView(
           child: SizedBox(
@@ -107,10 +144,10 @@ class _HomeState extends State<Home> {
                 therapy: therapy,
                 delete: () => 
                 setState(() {
+                  
                 therapies.remove(therapy);
                 }),
               );
-              
               },
             ),
           ),

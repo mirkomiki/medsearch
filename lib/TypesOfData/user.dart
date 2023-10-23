@@ -18,7 +18,7 @@ class User{
     String firstLetterName = name.characters.elementAt(0);
     String firstLetterSurname = surname.characters.elementAt(0);
     avatar = CircleAvatar(radius: 80,child: Text('$firstLetterName$firstLetterSurname'),);
-    therapies = [];
+    
   }
   set setTherapies(List<Therapy> t) {
     therapies = t;
