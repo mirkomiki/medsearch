@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medsearch/SettingsPages/addNewMemberUser.dart';
 
 class AddFamilyMember extends StatefulWidget {
   const AddFamilyMember({super.key});
@@ -7,9 +8,6 @@ class AddFamilyMember extends StatefulWidget {
   State<AddFamilyMember> createState() => _AddFamilyMemberState();
 }
 void addViaQRCode(){
-}
-void addManualy(){
-
 }
 void shareLink(){}
 class _AddFamilyMemberState extends State<AddFamilyMember> {
@@ -36,7 +34,13 @@ class _AddFamilyMemberState extends State<AddFamilyMember> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton.icon(onPressed: () {addManualy;} , label: const Text('Add manualy'), icon: const Icon(Icons.person_add),),
+              ElevatedButton.icon(onPressed: () async{
+                await Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const NewFamilyMemberManualy()),);
+              setState(() {}); 
+              },
+                label: const Text('Add manualy'), 
+                icon: const Icon(Icons.person_add),),
             ],
           ),
           const SizedBox(height: 40,),
@@ -47,11 +51,8 @@ class _AddFamilyMemberState extends State<AddFamilyMember> {
             ],
           ),
           
-      ],) 
-          
-        
-        
-      
+        ],
+      ),
     );
   }
 }

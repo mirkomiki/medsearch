@@ -1,45 +1,43 @@
 import "package:animated_snack_bar/animated_snack_bar.dart";
 import "package:flutter/material.dart";
 import "package:medsearch/TypesOfData/uploadPhotoDialog.dart";
+import "package:medsearch/TypesOfData/user.dart";
 import "package:medsearch/globals.dart";
 
-class UserEdit extends StatefulWidget {
-  const UserEdit({super.key});
+class NewFamilyMemberManualy extends StatefulWidget {
+  const NewFamilyMemberManualy({super.key});
 
   @override
-  State<UserEdit> createState() => _UserEditState();
+  State<NewFamilyMemberManualy> createState() => _NewFamilyMemberManualyState();
 }
 
-class _UserEditState extends State<UserEdit> {
+class _NewFamilyMemberManualyState extends State<NewFamilyMemberManualy> {
   TextEditingController nameController = TextEditingController();
   TextEditingController surnameController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   TextEditingController ageController = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    nameController.text = localUser.name;
-    surnameController.text = localUser.surname;
-    usernameController.text = localUser.username;
-    ageController.text = localUser.age.toString();
-  }
-  void finishUserAccountEdit(){
-    
-    localUser.age = int.tryParse(ageController.text.toString());
-    localUser.name = nameController.text.toString();
-    localUser.surname = surnameController.text.toString();
-    localUser.username = usernameController.text.toString();
+  late String name = nameController.text.toString();
+  late String username = usernameController.text.toString();
+  late String surname = surnameController.text.toString();
+  late int age = int.tryParse(ageController.text.toString())!;
 
-    
-    /* selectedPageIndex = 2;
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const Pages()),
-    ); */
+  void finishMemberAddManually(){
+    print('prolaz');
+    // ignore: unnecessary_new
+    localFamily.users.add(User(
+      username: usernameController.text,
+      name: nameController.text,
+      surname: surnameController.text,
+      age: int.tryParse(ageController.text) ?? 0,
+      therapies: [],
+    ));
+    nameController = TextEditingController();
+    surnameController = TextEditingController();
+    usernameController = TextEditingController();
+    ageController = TextEditingController();
+
     AnimatedSnackBar.material(
-    'Changes saved',
-    //Later fix dona il
+    'User Created',
     type: AnimatedSnackBarType.success,
     mobileSnackBarPosition: MobileSnackBarPosition.bottom,
     ).show(context);
@@ -95,10 +93,6 @@ class _UserEditState extends State<UserEdit> {
                           ],
                         ),  
                         const Padding(padding: EdgeInsets.all(25)),
-                        ElevatedButton(onPressed: () => {finishUserAccountEdit(), Navigator.of(context).pop()}, 
-                        child: const Text('Save changes'),),
-                        localUser.avatar,
-                        
                         
                         ElevatedButton(
                           onPressed: () => showDialog<String>(
@@ -108,6 +102,11 @@ class _UserEditState extends State<UserEdit> {
                           ).then((value) => setState(() => {})),
                           child: const Text('Upload photo'),
                         ),
+                        
+                        generateTempAvatar(),
+                        ElevatedButton(onPressed: () => {finishMemberAddManually(), Navigator.of(context).pop()}, 
+                        child: const Text('Save changes'),),
+                        
                       ],
                       
                     ),
@@ -117,4 +116,13 @@ class _UserEditState extends State<UserEdit> {
             ),
         );
   }
+CircleAvatar generateTempAvatar() {
+  
+    String fltr = '  Profile Picture \n  will';
+    String sltr = 'include initals,\n  add custom picture\n  later in Settings';
+    return  CircleAvatar(radius: 80,child: Text('$fltr $sltr', style: TextStyle(fontSize: 15, ),),);
+  }
+  
 }
+
+

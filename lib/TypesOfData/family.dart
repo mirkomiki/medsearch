@@ -5,8 +5,7 @@ import 'package:medsearch/globals.dart';
 class Family{
   late final int id;
   late String familyName;
-  int numberOfMembers = 1;
-  List<User> users = [];
+  late List<User> users = [];
   
   
   Family({required this.familyName, required this.users}){

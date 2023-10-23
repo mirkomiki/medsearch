@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/fullTherapyView.dart';
-import 'package:medsearch/Themes/avatars.dart';
+import 'package:medsearch/TypesOfData/Themes/avatars.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/TypesOfData/user.dart';

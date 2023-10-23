@@ -7,15 +7,15 @@ import 'package:medsearch/TypesOfData/user.dart';
 import 'package:medsearch/globals.dart';
 
 // ignore: non_constant_identifier_names, must_be_immutable
-class UploadPhotoDialog extends StatefulWidget {
+class UploadPhotoFamilyDialog extends StatefulWidget {
   
-  const UploadPhotoDialog({super.key});
+  const UploadPhotoFamilyDialog({super.key, required});
 
   @override
-  State<UploadPhotoDialog> createState() => _UploadPhotoDialogState();
+  State<UploadPhotoFamilyDialog> createState() => _UploadPhotoFamilyDialogState();
 }
 
-class _UploadPhotoDialogState extends State<UploadPhotoDialog> {
+class _UploadPhotoFamilyDialogState extends State<UploadPhotoFamilyDialog> {
   File? image;
   Future pickImage(ImageSource source) async{
     try {

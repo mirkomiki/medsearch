@@ -1,5 +1,6 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:medsearch/SettingsPages/addFamilyMember.dart';
 import 'package:medsearch/TypesOfData/family.dart';
 import 'package:medsearch/TypesOfData/userCard.dart';
 import 'package:medsearch/globals.dart';
@@ -18,9 +19,7 @@ class _EditFamilyState extends State<EditFamily> {
   @override
   void initState() {
     super.initState();
-    
     nameController.text = localFamily.familyName;
-    
   }
   
   void finishFamilyEdit() {
@@ -84,23 +83,21 @@ class _EditFamilyState extends State<EditFamily> {
             ),
           ),
         ),
-
-
-
-                        ElevatedButton(onPressed: () => {finishFamilyEdit(), Navigator.of(context).pop()}, 
-                        child: const Text('Save Changes'),),
-                        
-                        
-                        
-                        
-                      ],
-                      
-                    ),
-                  ),
+                    ElevatedButton(onPressed: () => {finishFamilyEdit(), Navigator.of(context).pop()}, 
+                    child: const Text('Save Changes'),),
+                  ],
                 ),
               ),
             ),
-        );
+          ),
+          floatingActionButton: FloatingActionButton(
+              onPressed: () async{
+                await Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddFamilyMember()),);
+              setState(() {});
+            }),
+        ),
+    );
   }
 }
 

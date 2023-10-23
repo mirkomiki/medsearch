@@ -1,9 +1,7 @@
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:medsearch/TypesOfData/user.dart';
 
+// ignore: must_be_immutable
 class HomeAvatarCard extends StatelessWidget {
   User user;
 
