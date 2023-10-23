@@ -6,9 +6,7 @@ class HomeAvatarCard extends StatelessWidget {
   User user;
 
   HomeAvatarCard({super.key, required this.user});
-
-  
-  
+    
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  decorated_dropdownbutton:
+    dependency: "direct main"
+    description:
+      name: decorated_dropdownbutton
+      sha256: "03844d031650f2561cf74b3480734bab5b8b40cc52bdf2af197f3345ab0e9418"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   fake_async:
     dependency: transitive
     description:

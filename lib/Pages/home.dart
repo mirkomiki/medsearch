@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/fullTherapyView.dart';
 import 'package:medsearch/Pages/pages.dart';
-import 'package:medsearch/TypesOfData/Themes/avatars.dart';
+import 'package:medsearch/TypesOfData/Themes/homeAvatars.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/TypesOfData/user.dart';
@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   
-  int selectedPerson = 0;
+  int selectedPerson = 101;
   List<Therapy> filterTherapiesForToday(List<Therapy> ctherapies) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -36,22 +36,22 @@ class _HomeState extends State<Home> {
     return filteredTherapies;
   }
   Row genRow(selectedPerson){
-      if(selectedPerson == 101){
-        return const Row(children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(15, 8, 8, 8),
-            child: Text("Everyone's therapy: ", style: TextStyle(fontSize: 18, color: Colors.white),),
-          ),
-        ],);
-      } else {
-        return Row(children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(15, 8, 8, 8),
-            child: Text("${localFamily.users[selectedPerson].name}'s therapy: ", style: TextStyle(fontSize: 18, color: Colors.white),),
-          ),
-        ],);
-      }
+    if(selectedPerson == 101){
+      return const Row(children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(15, 8, 8, 8),
+          child: Text("Everyone's therapy: ", style: TextStyle(fontSize: 18, color: Colors.white),),
+        ),
+      ],);
+    } else {
+      return Row(children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 8, 8, 8),
+          child: Text("${localFamily.users[selectedPerson].name}'s therapy: ", style: TextStyle(fontSize: 18, color: Colors.white),),
+        ),
+      ],);
     }
+  }
   late List<Therapy> todayReminders = [];
   
   List<Therapy> familyTherapy = [];
@@ -221,7 +221,7 @@ class _HomeState extends State<Home> {
                 delete: () => 
                 setState(() {
                   
-                therapies.remove(therapy);
+                todayReminders.remove(therapy);
                 }),
               );
               }

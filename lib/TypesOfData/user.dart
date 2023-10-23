@@ -14,7 +14,7 @@ class User{
   late List<Therapy> therapies;
 
   User({required String username, required String name, required String surname, required int age, required List<Therapy> therapies}){
-    this.name = name;
+    this.name = name ;
     this.username = username;
     this.surname = surname;
     id = userCount + 1;
@@ -24,4 +24,6 @@ class User{
     avatar = CircleAvatar(radius: 80,child: Text('$firstLetterName$firstLetterSurname'),);
     this.therapies = therapies;
   }
+
 }
+

@@ -45,6 +45,7 @@ dependencies:
   flutter_email_sender: ^6.0.2
   mailer: ^6.0.1
   image_picker: ^1.0.4
+  decorated_dropdownbutton: ^0.0.3
 
 dev_dependencies:
   flutter_test:

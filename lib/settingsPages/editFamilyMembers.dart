@@ -40,7 +40,6 @@ class _EditFamilyMemberState extends State<EditFamilyMember> {
     setState(() {});
     AnimatedSnackBar.material(
     'Changes saved',
-    //Later fix dona il
     type: AnimatedSnackBarType.success,
     mobileSnackBarPosition: MobileSnackBarPosition.bottom,
     ).show(context);

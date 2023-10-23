@@ -48,7 +48,7 @@ class _PagesState extends State<Pages> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.add_box_rounded),
-                label: 'New Reminder',
+                label: 'New Therapy',
               ),
               BottomNavigationBarItem(
                 

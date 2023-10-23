@@ -25,7 +25,7 @@ class _BugReportFormState extends State<BugReportForm> {
               controller: _bugDescriptionController,
               decoration: InputDecoration(labelText: 'Bug Description'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
                 final bugDescription = _bugDescriptionController.text;

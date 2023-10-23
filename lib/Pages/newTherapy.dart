@@ -1,7 +1,9 @@
+import 'package:decorated_dropdownbutton/decorated_dropdownbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/TimePickerWidget.dart';
 import 'package:medsearch/Pages/pages.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
+import 'package:medsearch/TypesOfData/userTile.dart';
 import 'package:medsearch/globals.dart';
 
 const List<String> dailyPillsItemList = <String>['1', '2', '3', '4', '5', '6'];
@@ -15,26 +17,20 @@ class NewTherapy extends StatefulWidget {
 class _NewTherapyState extends State<NewTherapy> {
   DateTime endDate = DateTime.now().add(const Duration(days: 1));
   DateTime startDate = DateTime.now();
-  
   List<TimeOfDay> reminderList = [TimeOfDay.now()];
-
-  
-
-
   int index = 1;
   TextEditingController nameController = TextEditingController();
-  
   late int? pillsADay = 1;
   TextEditingController pillsInBottleController = TextEditingController();
   TextEditingController dosageController = TextEditingController();
 
+
   late String name = nameController.text;
-  
   late int? dosage = int.tryParse(dosageController.text);
   late int? pillsInBottle= int.tryParse(pillsInBottleController.text);
 
   void finishAddTherapy(){
-      therapies.add(Therapy(name, dosage, pillsInBottle, startDate, endDate, reminderList));
+      localFamily.users[selectedPerson].therapies.add(Therapy(name, dosage, pillsInBottle, startDate, endDate, reminderList));
       // ignore: avoid_print
       nameController = TextEditingController();
       pillsInBottleController = TextEditingController();
@@ -46,10 +42,8 @@ class _NewTherapyState extends State<NewTherapy> {
         context,
         MaterialPageRoute(builder: (context) => const Pages()),
       );
-      
-      
- 
   }
+  int selectedPerson = 0;
   @override
   Widget build(BuildContext context) {
     final eday = endDate.day.toString();
@@ -58,6 +52,7 @@ class _NewTherapyState extends State<NewTherapy> {
     final sday = startDate.day.toString();
     final smonth = startDate.month.toString();
     final syear = startDate.year.toString();
+    
       return GestureDetector(
         onTap: () {
          FocusScope.of(context).requestFocus(FocusNode());
@@ -99,24 +94,66 @@ class _NewTherapyState extends State<NewTherapy> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget> [
                               Flexible(
-                                  child: DropdownButton<int>(value: pillsADay, onChanged: (int? value) {
-                                      // This is called when the user selects an item.
-                                      setState(() {
-                                        pillsADay = value!;
-                                        _updateReminderList();
-                                      });
-                                    },
-                                    items: List.generate(6, (index) {
-                                      return DropdownMenuItem<int>(
-                                        value: index + 1,
-                                        child: Text((index + 1).toString()),
-                                      );
-                                    },
-                                    ),
-                                ),
+                                flex: 1,
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButtonFormField<int>(
+                                      value: pillsADay,
+                                      
+                                      decoration: const InputDecoration(
+                                        filled: true,
+                                        label: Text('Pills a day', style: TextStyle(color: Colors.black),),
+                                        fillColor: Colors.grey,
+                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black, width: 3),),
+                                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black, width: 3),)), 
+                                        dropdownColor: const Color.fromARGB(255, 202, 202, 202),
+                                      onChanged: (int? value) {
+                                        // This is called when the user selects an item.
+                                        setState(() {
+                                          pillsADay = value!;
+                                          _updateReminderList();
+                                        });
+                                      },
+                                      items: List.generate(6, (index) {
+                                        return DropdownMenuItem<int>(
+                                          value: index + 1,
+                                          child: Text((index + 1).toString(), style: const TextStyle(color: Colors.black, fontSize: 14),),
+                                        );
+                                      },
+                                      ),
+                                                                  ),
+                                  ),
                               ),
-                            ], 
-                          ),
+                             Flexible(
+                              flex: 1,
+                            // ignore: avoid_print
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<int>(
+                                value: selectedPerson, 
+                                onChanged: (int? value) {
+                                  // This is called when the user selects an item.
+                                  setState(() {
+                                    selectedPerson = value!;
+                                    //print('Jel ulazis');
+                                  });
+                                },
+                                style: const TextStyle(color: Colors.deepPurple),
+                                  underline: Container(
+                                  height: 2,
+                                  color: Colors.deepPurpleAccent,),
+                                items: List.generate(localFamily.users.length, (index) {
+                                  return DropdownMenuItem<int>(
+                                    value: index,
+                                    child: UserTile(user: localFamily.users[index]),
+                                  );
+                                },
+                                ),
+                                                      ),
+                            ),
+                        ),
+                    ], 
+                  ),
+                  
+                        
                         const Padding(padding: EdgeInsets.all(10)),
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////
                          Row(
@@ -203,26 +240,14 @@ class _NewTherapyState extends State<NewTherapy> {
                       ),
                       ElevatedButton(
                             onPressed: () {finishAddTherapy();}, 
-                            child: const Text('NEXT')),
+                            child: const Text('NEXT')
+                      ),
                       ],
                     ),
                     
                   ),
                 ),
-              ) ,      
-        /* floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            
-            /* Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => SetReminders(listSize: globalDailyReminders),),
-                  
-                  ); */
-              },
-          
-          foregroundColor: Colors.cyan,
-          backgroundColor: Colors.black,
-          child: const Icon(Icons.arrow_right_alt, size: 40,),
-          ), */
+              ) ,
         ),
         
       ); 

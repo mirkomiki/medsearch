@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:medsearch/Pages/TimePickerWidget.dart';
 import 'package:medsearch/Pages/newTherapy.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
+import 'package:medsearch/TypesOfData/user.dart';
 
 class EditTherapy extends StatefulWidget {
   final Therapy therapy;
-  const EditTherapy({super.key, required this.therapy});
+  
+  final User user;
+  const EditTherapy({super.key, required this.therapy, required this.user});
   @override
   State<EditTherapy> createState() => _EditTherapyState(
   );
@@ -67,7 +70,7 @@ class _EditTherapyState extends State<EditTherapy> {
                   Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget> [
+                          children: <Widget>[
                             Flexible(
                               child: TextFormField(style: const TextStyle(color: Colors.white),focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Current number of pills in bottle...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26)),controller: pillsAvaliableController,keyboardType: const TextInputType.numberWithOptions(decimal: false),),
                               
@@ -76,6 +79,7 @@ class _EditTherapyState extends State<EditTherapy> {
                             Flexible(
                               child: TextFormField(style: const TextStyle(color: Colors.white),  focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Dosage...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26),),controller: dosageController,keyboardType: const TextInputType.numberWithOptions(decimal: false),),
                             ),
+                        
                           ],
                         ),
                   const Padding(padding: EdgeInsets.all(15)),
@@ -111,31 +115,7 @@ class _EditTherapyState extends State<EditTherapy> {
                             ),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget> [
-                              Flexible(
-                                  // ignore: avoid_print
-                                  child: DropdownButton<int>(value: pillsADay, onChanged: (int? value) {
-                                      // This is called when the user selects an item.
-                                      setState(() {
-                                        pillsADay = value!;
-                                        //print('Jel ulazis');
-                                        _updateReminderList();
-                                      });
-                                    },
-                                    items: List.generate(6, (index) {
-                                      return DropdownMenuItem<int>(
-                                        value: index + 1,
-                                        child: Text((index + 1).toString()),
-                                      );
-                                    },
-                                    ),
-                                ),
-                              ),
-                            ], 
-                          ),
+                        
                         const Padding(padding: EdgeInsets.all(8)),
                         Row(
                           children: <Widget>[

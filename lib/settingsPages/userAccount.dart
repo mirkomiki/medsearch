@@ -39,7 +39,6 @@ class _UserEditState extends State<UserEdit> {
     ); */
     AnimatedSnackBar.material(
     'Changes saved',
-    //Later fix dona il
     type: AnimatedSnackBarType.success,
     mobileSnackBarPosition: MobileSnackBarPosition.bottom,
     ).show(context);
