@@ -17,10 +17,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   
-  
+  int selectedPerson = 0;
   List<Therapy> filterTherapiesForToday(List<Therapy> ctherapies) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
+    
     
 
 
@@ -34,7 +35,23 @@ class _HomeState extends State<Home> {
     },).toList();
     return filteredTherapies;
   }
-
+  Row genRow(selectedPerson){
+      if(selectedPerson == 101){
+        return const Row(children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(15, 8, 8, 8),
+            child: Text("Everyone's therapy: ", style: TextStyle(fontSize: 18, color: Colors.white),),
+          ),
+        ],);
+      } else {
+        return Row(children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 8, 8, 8),
+            child: Text("${localFamily.users[selectedPerson].name}'s therapy: ", style: TextStyle(fontSize: 18, color: Colors.white),),
+          ),
+        ],);
+      }
+    }
   late List<Therapy> todayReminders = [];
   
   List<Therapy> familyTherapy = [];
@@ -102,7 +119,7 @@ class _HomeState extends State<Home> {
                           onTap: () {
                             setState(() {
                               updateTodayReminders(0);
-                              
+                              selectedPerson = 101;
                             });
                             
                           },
@@ -120,8 +137,8 @@ class _HomeState extends State<Home> {
                       onTap: () {
                         setState(() {
                           todayReminders = filterTherapiesForToday(localFamily.users[index-1].therapies);
+                          selectedPerson = index-1;
                         });
-                        
                       },
                       radius: 35,
                       child: HomeAvatarCard(user: localFamily.users[index-1]));
@@ -132,8 +149,8 @@ class _HomeState extends State<Home> {
           ),
           ],
         ),
-        
-        
+        genRow(selectedPerson),
+        const SizedBox(height: 5,),
         SingleChildScrollView(
           child: SizedBox(
             height: 420,
@@ -144,55 +161,58 @@ class _HomeState extends State<Home> {
               if(index == 0){
                 if(todayReminders.isEmpty){
                   return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  shadowColor: Colors.black,
-                  surfaceTintColor: Colors.amber,
-                  color: const Color.fromARGB(255, 201, 206, 213),
-                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                  child:
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Text('No reminders soon\nCreate new therapy if needed'),
-                          const SizedBox(width: 10,),
-                          ElevatedButton.icon(onPressed: () {
-                            selectedPageIndex = 1;
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => const Pages()),
-                            );}, icon: const Icon(Icons.add), label: const Text('ADD', style: TextStyle(fontSize: 12),),),
-                        ],
-                      ),
-                    ),);
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        shadowColor: Colors.black,
+                        surfaceTintColor: Colors.amber,
+                        color: const Color.fromARGB(255, 201, 206, 213),
+                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                        child:
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                const Text('No reminders soon\nCreate new therapy if needed'),
+                                const SizedBox(width: 10,),
+                                ElevatedButton.icon(onPressed: () {
+                                  selectedPageIndex = 1;
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const Pages()),
+                                  );}, icon: const Icon(Icons.add), label: const Text('ADD', style: TextStyle(fontSize: 12),),),
+                              ],
+                            ),
+                          ),
+                        );
+                      
                 } else {
                   return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  shadowColor: Colors.black,
-                  surfaceTintColor: Colors.amber,
-                  color: const Color.fromARGB(255, 201, 206, 213),
-                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                  child:
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Text('Create new therapy if needed'),
-                          const SizedBox(width: 10,),
-                          ElevatedButton.icon(onPressed: () {selectedPageIndex = 1;
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const Pages()),
-                          );}, icon: const Icon(Icons.add), label: const Text('ADD', style: TextStyle(fontSize: 12),),),
-                        ],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35),
                       ),
-                    ),);
+                      shadowColor: Colors.black,
+                      surfaceTintColor: Colors.amber,
+                      color: const Color.fromARGB(255, 201, 206, 213),
+                      margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                      child:
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const Text('Create new therapy if needed'),
+                              const SizedBox(width: 10,),
+                              ElevatedButton.icon(onPressed: () {selectedPageIndex = 1;
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const Pages()),
+                              );}, icon: const Icon(Icons.add), label: const Text('ADD', style: TextStyle(fontSize: 12),),),
+                            ],
+                          ),
+                        ),
+                  );
                 }
               } else {
                 final therapy = todayReminders[index-1];

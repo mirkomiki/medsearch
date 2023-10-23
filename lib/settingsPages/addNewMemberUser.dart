@@ -1,12 +1,13 @@
 import "package:animated_snack_bar/animated_snack_bar.dart";
 import "package:flutter/material.dart";
+import "package:medsearch/TypesOfData/uploadDialogFamilyUser.dart";
 import "package:medsearch/TypesOfData/uploadPhotoDialog.dart";
 import "package:medsearch/TypesOfData/user.dart";
 import "package:medsearch/globals.dart";
 
 class NewFamilyMemberManualy extends StatefulWidget {
   const NewFamilyMemberManualy({super.key});
-
+  
   @override
   State<NewFamilyMemberManualy> createState() => _NewFamilyMemberManualyState();
 }
@@ -20,7 +21,7 @@ class _NewFamilyMemberManualyState extends State<NewFamilyMemberManualy> {
   late String username = usernameController.text.toString();
   late String surname = surnameController.text.toString();
   late int age = int.tryParse(ageController.text.toString())!;
-
+  
   void finishMemberAddManually(){
     
     // ignore: unnecessary_new
@@ -93,16 +94,16 @@ class _NewFamilyMemberManualyState extends State<NewFamilyMemberManualy> {
                           ],
                         ),  
                         const Padding(padding: EdgeInsets.all(25)),
-                        
+                        /*
                         ElevatedButton(
                           onPressed: () => showDialog<String>(
                             context: context, 
-                            builder: (BuildContext context) => const UploadPhotoDialog(),
+                            builder: (BuildContext context) => UploadPhotoFamilyDialog(user: widget.user),
 
                           ).then((value) => setState(() => {})),
                           child: const Text('Upload photo'),
                         ),
-                        
+                        */
                         generateTempAvatar(),
                         ElevatedButton(onPressed: () => {finishMemberAddManually(), Navigator.of(context).pop()}, 
                         child: const Text('Save changes'),),

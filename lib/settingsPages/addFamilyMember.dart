@@ -36,7 +36,7 @@ class _AddFamilyMemberState extends State<AddFamilyMember> {
             children: [
               ElevatedButton.icon(onPressed: () async{
                 await Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const NewFamilyMemberManualy()),);
+              MaterialPageRoute(builder: (context) => NewFamilyMemberManualy()),);
               setState(() {}); 
               },
                 label: const Text('Add manualy'), 
