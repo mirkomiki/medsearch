@@ -70,7 +70,7 @@ class _EditTherapyState extends State<EditTherapy> {
                   Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
+                          children: <Widget> [
                             Flexible(
                               child: TextFormField(style: const TextStyle(color: Colors.white),focusNode: FocusNode(),decoration: InputDecoration(border: const OutlineInputBorder(),  labelText: 'Current number of pills in bottle...', labelStyle: TextStyle(fontStyle: FontStyle.italic,color: Colors.grey[500]),filled: true,fillColor: const Color.fromARGB(255, 26, 26, 26)),controller: pillsAvaliableController,keyboardType: const TextInputType.numberWithOptions(decimal: false),),
                               
@@ -85,6 +85,42 @@ class _EditTherapyState extends State<EditTherapy> {
                   const Padding(padding: EdgeInsets.all(15)),
                   
                   /////////////////////////////////////////////////////////////////////////////////////////////////////////
+                         SizedBox(
+                          width: 100,
+                          child: 
+                              Flexible(
+                                flex: 1,
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButtonFormField<int>(
+                                      value: pillsADay,
+                                      
+                                      decoration: const InputDecoration(
+                                        filled: true,
+                                        label: Text('Pills a day', style: TextStyle(color: Colors.black),),
+                                        fillColor: Colors.grey,
+                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black, width: 3),),
+                                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black, width: 3),)), 
+                                        dropdownColor: const Color.fromARGB(255, 202, 202, 202),
+                                      onChanged: (int? value) {
+                                        // This is called when the user selects an item.
+                                        setState(() {
+                                          pillsADay = value!;
+                                          _updateReminderList();
+                                        });
+                                      },
+                                      items: List.generate(6, (index) {
+                                        return DropdownMenuItem<int>(
+                                          value: index + 1,
+                                          child: Text((index + 1).toString(), style: const TextStyle(color: Colors.black, fontSize: 14),),
+                                        );
+                                      },
+                                      ),
+                                                                  ),
+                                  ),
+                              ),
+                            
+                    
+                         ),
                          Row(
                           children: <Widget>[
                             const Padding(padding: EdgeInsets.all(10)),

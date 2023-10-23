@@ -11,7 +11,15 @@ class FullTherapy extends StatefulWidget {
   @override
   State<FullTherapy> createState() => _FullTherapyState();
 }
-
+Row genRow(int selectedPerson) {
+  return Row(children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+        child: Text("${localFamily.users[selectedPerson].name}'s therapy: ", style: TextStyle(fontSize: 18, color: Colors.white),),
+      ),
+    ],
+  );
+}
 class _FullTherapyState extends State<FullTherapy> {
   int selectedPerson = 0;
   @override
@@ -58,6 +66,7 @@ class _FullTherapyState extends State<FullTherapy> {
                     ),
                 ],
               ),
+          genRow(selectedPerson),
           ListView.builder(
             itemCount: localFamily.users[selectedPerson].therapies.length,
             shrinkWrap: true,
@@ -96,8 +105,8 @@ class _FullTherapyState extends State<FullTherapy> {
         child: const Icon(Icons.add, size: 30,),
         onPressed: ()
         {selectedPageIndex = 1;
-          Navigator.push(
-            context,
+          //Navigator.pop(context);              PROBAJ DA SE NE VIDI TRANSITION
+          Navigator.pushReplacement(context, 
             MaterialPageRoute(builder: (context) => const Pages()),);
           },
       
@@ -105,4 +114,6 @@ class _FullTherapyState extends State<FullTherapy> {
     );
   }
 }
+
+
 

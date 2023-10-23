@@ -147,11 +147,11 @@ class _NewTherapyState extends State<NewTherapy> {
                                   );
                                 },
                                 ),
-                                                      ),
-                            ),
+                                                            ),
+                                  ),
+                              ),
+                          ], 
                         ),
-                    ], 
-                  ),
                   
                         
                         const Padding(padding: EdgeInsets.all(10)),

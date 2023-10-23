@@ -161,32 +161,32 @@ class _HomeState extends State<Home> {
               if(index == 0){
                 if(todayReminders.isEmpty){
                   return Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(35),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(35),
+                    ),
+                    shadowColor: Colors.black,
+                    surfaceTintColor: Colors.amber,
+                    color: const Color.fromARGB(255, 201, 206, 213),
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    child:
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text('No reminders soon\nCreate new therapy if needed'),
+                            const SizedBox(width: 10,),
+                            ElevatedButton.icon(onPressed: () {
+                              selectedPageIndex = 1;
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const Pages()),
+                              );}, icon: const Icon(Icons.add), label: const Text('ADD', style: TextStyle(fontSize: 12),),),
+                          ],
                         ),
-                        shadowColor: Colors.black,
-                        surfaceTintColor: Colors.amber,
-                        color: const Color.fromARGB(255, 201, 206, 213),
-                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                        child:
-                          Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                const Text('No reminders soon\nCreate new therapy if needed'),
-                                const SizedBox(width: 10,),
-                                ElevatedButton.icon(onPressed: () {
-                                  selectedPageIndex = 1;
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const Pages()),
-                                  );}, icon: const Icon(Icons.add), label: const Text('ADD', style: TextStyle(fontSize: 12),),),
-                              ],
-                            ),
-                          ),
-                        );
-                      
+                      ),
+                    );
+                  
                 } else {
                   return Card(
                       shape: RoundedRectangleBorder(
