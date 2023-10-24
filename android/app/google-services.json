@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "548979390930",
+    "project_id": "theraputico-cc096",
+    "storage_bucket": "theraputico-cc096.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548979390930:android:6adcedd6898671a84ef00b",
+        "android_client_info": {
+          "package_name": "com.example.medsearch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFedeJP02Dqu91JI_a5Aw-yXE97z8GhS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
