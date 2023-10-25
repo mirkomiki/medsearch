@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
@@ -10,10 +8,11 @@ class User{
   String surname = '';
   int? age = 0;
   String username = '';
+  String password;
   late CircleAvatar avatar;
   late List<Therapy> therapies;
 
-  User({required String username, required String name, required String surname, required int age, required List<Therapy> therapies}){
+  User({required String username,required this.password, required String name, required String surname, required int age, required List<Therapy> therapies}){
     this.name = name ;
     this.username = username;
     this.surname = surname;

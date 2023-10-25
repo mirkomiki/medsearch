@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:medsearch/Pages/authPage.dart';
 import 'package:medsearch/Pages/pages.dart';
 class Loading extends StatefulWidget {
   const Loading({super.key});
@@ -32,7 +33,7 @@ class _LoadingState extends State<Loading> {
               
           ],
         ),
-        nextScreen: const Pages(),
+        nextScreen: const AuthPage(),
       ),
     );
   }

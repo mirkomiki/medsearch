@@ -27,6 +27,7 @@ class _NewFamilyMemberManualyState extends State<NewFamilyMemberManualy> {
     // ignore: unnecessary_new
     localFamily.users.add(User(
       username: usernameController.text,
+      password: '',
       name: nameController.text,
       surname: surnameController.text,
       age: int.tryParse(ageController.text) ?? 0,

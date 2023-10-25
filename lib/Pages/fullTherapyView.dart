@@ -114,6 +114,3 @@ class _FullTherapyState extends State<FullTherapy> {
     );
   }
 }
-
-
-

@@ -12,7 +12,20 @@
           "package_name": "com.example.medsearch"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "548979390930-7v3fe6adijchi2pgbmkkgp47lfv4orap.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medsearch",
+            "certificate_hash": "3c7f295fefbd571631d1f7de236c3e139298cd79"
+          }
+        },
+        {
+          "client_id": "548979390930-hd4922igbq1g2k2l9o5jvqussus72f5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCFedeJP02Dqu91JI_a5Aw-yXE97z8GhS8"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548979390930-2ki6rnpl21clggvdbmtuh9o2uhnvbo9l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "548979390930-su0s9fjh2qh5simc796s7oe93h76vlq4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.medsearch"
+              }
+            }
+          ]
         }
       }
     }

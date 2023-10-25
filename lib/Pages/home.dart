@@ -1,12 +1,13 @@
-import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:medsearch/Pages/authPage.dart';
 import 'package:medsearch/Pages/fullTherapyView.dart';
 import 'package:medsearch/Pages/pages.dart';
 import 'package:medsearch/TypesOfData/Themes/homeAvatars.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
-import 'package:medsearch/TypesOfData/user.dart';
 import 'package:medsearch/globals.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -60,7 +61,7 @@ class _HomeState extends State<Home> {
     if(localFamily.users.isEmpty){
       familyTherapy = localUser.therapies;
     } else {
-      for (User user in localFamily.users) {
+      for (var user in localFamily.users) {
         familyTherapy.addAll(user.therapies);
       }
     }
@@ -80,12 +81,22 @@ class _HomeState extends State<Home> {
     updateTodayReminders(0);
     
   }
-  
+  signUserOut() async{
+    await FirebaseAuth.instance.signOut();
+    setState(() {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AuthPage(),));
+    });
+    
+  }
   @override
   Widget build(BuildContext context) {
+    final userAuth = FirebaseAuth.instance.currentUser!;
     return Scaffold(
     backgroundColor: Colors.grey[900],
     appBar: AppBar(
+      actions: [
+        IconButton(onPressed: () => signUserOut(), icon: const Icon(Icons.logout)),
+      ],
       title:  Image.asset('assets/rsz_transparent_logo_small.png',),
       centerTitle: true,
       backgroundColor: Colors.grey[900],
@@ -153,7 +164,7 @@ class _HomeState extends State<Home> {
         const SizedBox(height: 5,),
         SingleChildScrollView(
           child: SizedBox(
-            height: 420,
+            height: MediaQuery.sizeOf(context).height * 0.47,
             child: ListView.builder(
             itemCount: todayReminders.length+1,
             itemBuilder: (context, index) {
@@ -283,6 +294,7 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
+        Padding(padding: const EdgeInsets.fromLTRB(25, 8, 25, 8),child: Text('LOGGED IN AS: ${userAuth.email}',style: TextStyle(color: Colors.grey[700]),),)
       ],
       ),
     ),
