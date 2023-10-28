@@ -31,7 +31,6 @@ class _LoginPageState extends State<LoginPage> {
         
         
       }
-    
     // ignore: use_build_context_synchronously
   }
   void wrongEmailPasswordMessage() {
@@ -44,7 +43,6 @@ class _LoginPageState extends State<LoginPage> {
   
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
@@ -107,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 SquareTile(imagePath: 'assets/google-logo.png', onTap: () => AuthService().signInWithGoogle(),),
                 SizedBox(width: 25,),
-                SquareTile(imagePath: 'assets/facebook-logo.png', onTap: () => AuthService().signInWithGoogle(),),
+                SquareTile(imagePath: 'assets/facebook-logo.png', onTap: () => AuthService().signInWithFacebook(),),
               ],
             ),
             const SizedBox(height: 25,),

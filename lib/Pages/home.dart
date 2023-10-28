@@ -9,6 +9,7 @@ import 'package:medsearch/TypesOfData/Themes/homeAvatars.dart';
 import 'package:medsearch/TypesOfData/dailyTherapyCard.dart';
 import 'package:medsearch/TypesOfData/therapy.dart';
 import 'package:medsearch/globals.dart';
+import 'package:medsearch/services/auth_service.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -82,7 +83,7 @@ class _HomeState extends State<Home> {
     
   }
   signUserOut() async{
-    await FirebaseAuth.instance.signOut();
+    await AuthService().signOut();
     setState(() {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AuthPage(),));
     });
